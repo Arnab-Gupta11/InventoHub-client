@@ -5,7 +5,7 @@ const Faq = () => {
   return (
     <div>
       <Section>
-        <div className="grid grid-cols-1 md:grid-cols-5 max-w-screen-xl items-center mx-auto gap-7 px-5 lg:px-0">
+        <div className="grid grid-cols-1 lg:grid-cols-5 max-w-screen-xl items-center mx-auto gap-7 px-5 lg:px-0">
           <div className="md:col-span-3">
             <div className="text-center  px-5 lg:px-0 lg:text-start mb-5">
               <h2 className="text-xl lg:text-2xl font-semibold text-[#FF6A25]">Frequently Asked Questions</h2>
@@ -18,7 +18,7 @@ const Faq = () => {
             </div>
           </div>
           <div className="md:col-span-2 order-first md:order-last">
-            <img className="h-full rounded-lg" src={faqImg} alt="" />
+            <img className="h-full rounded-lg hidden lg:block" src={faqImg} alt="" />
           </div>
         </div>
       </Section>
