@@ -14,14 +14,8 @@ const Navbar = () => {
   };
   window.addEventListener("scroll", changeBackground);
   console.log(navbar);
-  const { logutUser, user } = useAuth();
-  const handleDelete = () => {
-    logutUser()
-      .then(() => {})
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
+  const { logoutUser, user } = useAuth();
+
   return (
     <div
       className={
@@ -33,7 +27,34 @@ const Navbar = () => {
           <div className=" px-2 mx-2">
             <NavbarTitle></NavbarTitle>
           </div>
-          <div className="  lg:hidden">
+          <div className="  lg:hidden flex items-center">
+            {user ? (
+              <div className="dropdown dropdown-end z-50 ml-5">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-14 rounded-full border-2 border-[#FBB04B]">
+                    <img src={user?.photoURL} />
+                  </div>
+                </label>
+                <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                  <li>
+                    <a className="text-base  font-medium text-[#1B2850] mb-0">{user?.displayName}</a>
+                  </li>
+                  <li>
+                    <a className="text-base  font-medium text-[#1B2850] mt-0">{user?.email}</a>
+                  </li>
+                  <li>
+                    <Link to={"/"}>
+                      <button onClick={logoutUser} className="text-[#FF6A25] text-lg font-medium ">
+                        Logout
+                      </button>
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              ""
+            )}
+
             <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -79,14 +100,41 @@ const Navbar = () => {
               </button>
             </NavLink>
             {user ? (
-              <button className="text-white uppercase font-bold hover:bg-yellow-300 hover:px-4 hover:py-2 hover:rounded-md " onClick={handleDelete}>
-                Logout
-              </button>
+              <div className="dropdown dropdown-end z-50 ml-5">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-14 rounded-full border-2 border-[#FBB04B]">
+                    <img src={user?.photoURL} />
+                  </div>
+                </label>
+                <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                  <li>
+                    <a className="text-base  font-medium mb-0 text-[#1B2850]">{user?.displayName}</a>
+                  </li>
+                  <li>
+                    <a className="text-base  font-medium text-[#1B2850] mt-0">{user?.email}</a>
+                  </li>
+                  <li>
+                    <Link to={"/"}>
+                      <button onClick={logoutUser} className="text-[#FF6A25] text-lg font-medium">
+                        Logout
+                      </button>
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             ) : (
-              <Link to={"/login"}>
-                <button className="text-white uppercase font-bold hover:bg-yellow-300 hover:px-4 hover:py-2 hover:rounded-md ">Login</button>
-              </Link>
+              ""
             )}
+
+            <div>
+              {user ? (
+                ""
+              ) : (
+                <button className=" bg-[#FF792E]   px-8 py-2 rounded-md hover:bg-orange-600 hover:duration-500 font-semibold text-white">
+                  <Link to={"/login"}>Login</Link>
+                </button>
+              )}
+            </div>
           </ul>
         </div>
       </div>
