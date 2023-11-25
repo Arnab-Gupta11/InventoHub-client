@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../../components/shared/Navbar/Navbar";
 import Sidebar from "../../components/shared/Navbar/Sidebar";
+import Footer from "../../components/shared/Footer/Footer";
 
 const Root = () => {
   return (
@@ -12,6 +13,7 @@ const Root = () => {
           <Navbar></Navbar>
           {/* Page content here */}
           <Outlet></Outlet>
+          <Footer></Footer>
         </div>
         <div className="drawer-side z-50 min-h-screen">
           <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
