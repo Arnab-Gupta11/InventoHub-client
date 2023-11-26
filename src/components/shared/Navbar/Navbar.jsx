@@ -1,9 +1,13 @@
 import { Link, NavLink } from "react-router-dom";
 import NavbarTitle from "./NavbarTitle";
-import { FaShoppingCart } from "react-icons/fa";
 import useAuth from "../../../hooks/useAuth";
 import { useState } from "react";
+import useManager from "../../../hooks/useManager";
+import useAdmin from "../../../hooks/useAdmin";
 const Navbar = () => {
+  const [isManager] = useManager();
+  const [isAdmin] = useAdmin();
+
   const [navbar, setNavbar] = useState(false);
   const changeBackground = () => {
     if (window.scrollY >= 77.3) {
@@ -13,7 +17,6 @@ const Navbar = () => {
     }
   };
   window.addEventListener("scroll", changeBackground);
-  console.log(navbar);
   const { logoutUser, user } = useAuth();
 
   return (
@@ -69,36 +72,35 @@ const Navbar = () => {
             <NavLink to="/" className={({ isActive }) => (isActive ? "text-yellow-300 uppercase font-bold" : "text-white uppercase font-bold")}>
               Home
             </NavLink>
+            {!isManager && !isAdmin && (
+              <NavLink
+                to="/create-store"
+                className={({ isActive }) => (isActive ? "text-yellow-300 uppercase font-bold" : "text-white uppercase font-bold")}
+              >
+                Create Store
+              </NavLink>
+            )}
+            {(isAdmin || isManager) && (
+              <NavLink
+                to="/dashboard"
+                className={({ isActive }) => (isActive ? "text-yellow-300 uppercase font-bold" : "text-white uppercase font-bold")}
+              >
+                Dashboard
+              </NavLink>
+            )}
             <NavLink
-              to="/contact"
+              to="/watch-demo"
               className={({ isActive }) => (isActive ? "text-yellow-300 uppercase font-bold" : "text-white uppercase font-bold")}
             >
-              Contact us
+              Watch demo
             </NavLink>
             <NavLink
-              to="/dashboard"
+              to="/register"
               className={({ isActive }) => (isActive ? "text-yellow-300 uppercase font-bold" : "text-white uppercase font-bold")}
             >
-              Dashboard
+              Register
             </NavLink>
-            <NavLink
-              to="/our-menu"
-              className={({ isActive }) => (isActive ? "text-yellow-300 uppercase font-bold" : "text-white uppercase font-bold")}
-            >
-              Our menu
-            </NavLink>
-            <NavLink
-              to="/our-shop"
-              className={({ isActive }) => (isActive ? "text-yellow-300 uppercase font-bold" : "text-white uppercase font-bold")}
-            >
-              Our Shop
-            </NavLink>
-            <NavLink to="/">
-              <button className="flex items-center gap-1">
-                <FaShoppingCart className="text-yellow-300"></FaShoppingCart>
-                <div className="badge badge-secondary bg-pink-700">+0</div>
-              </button>
-            </NavLink>
+
             {user ? (
               <div className="dropdown dropdown-end z-50 ml-5">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

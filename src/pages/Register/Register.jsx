@@ -7,8 +7,10 @@ import useAuth from "../../hooks/useAuth";
 import NavbarTitle from "../../components/shared/Navbar/NavbarTitle";
 import imageUpload from "../../api/utils";
 import { FcGoogle } from "react-icons/fc";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const Register = () => {
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
   const { registerUser, updateUserProfile, googleSignIn } = useAuth();
   const {
     register,
@@ -30,6 +32,15 @@ const Register = () => {
 
       //3.Update user profile
       await updateUserProfile(data.name, imageData?.data?.display_url);
+
+      const currentUser = {
+        email: data.email,
+        role: "guest",
+        status: "verified",
+      };
+      const res = await axiosPublic.post(`/users`, currentUser);
+
+      console.log("🚀 ~ file: Register.jsx:43 ~ onSubmit ~ data:", res.data);
       toast.success("User signup successfully");
       reset();
       navigate("/");
@@ -44,11 +55,15 @@ const Register = () => {
   const handleGoogleLogin = async () => {
     try {
       // 2.user registration
-      await googleSignIn();
+      const result = await googleSignIn();
 
       // 4.Save User
-      //   const dbResponse = await saveUser(result?.user);
-      //   console.log("🚀 ~ file: SignUp.jsx:30 ~ handleSubmit ~ dbResponse:", dbResponse);
+      const currentUser = {
+        email: result?.user?.email,
+        role: "guest",
+        status: "verified",
+      };
+      await axiosPublic.post(`/users`, currentUser);
 
       //5.get Token
       //   await getToken(result?.user?.email);

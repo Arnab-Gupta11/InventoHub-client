@@ -8,7 +8,9 @@ import loginAnimation from "../../assets/loginAnimation.json";
 import useAuth from "../../hooks/useAuth";
 import NavbarTitle from "../../components/shared/Navbar/NavbarTitle";
 import { useForm } from "react-hook-form";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const Login = () => {
+  const axiosPublic = useAxiosPublic();
   const { loginUser, googleSignIn } = useAuth();
   const navigate = useNavigate();
   //   const location = useLocation();
@@ -40,11 +42,15 @@ const Login = () => {
   const handleGoogleLogin = async () => {
     try {
       // 2.user registration
-      await googleSignIn();
+      const result = await googleSignIn();
 
       // 4.Save User
-      //   const dbResponse = await saveUser(result?.user);
-      //   console.log("🚀 ~ file: SignUp.jsx:30 ~ handleSubmit ~ dbResponse:", dbResponse);
+      const currentUser = {
+        email: result?.user?.email,
+        role: "guest",
+        status: "verified",
+      };
+      await axiosPublic.post(`/users`, currentUser);
 
       //5.get Token
       //   await getToken(result?.user?.email);
