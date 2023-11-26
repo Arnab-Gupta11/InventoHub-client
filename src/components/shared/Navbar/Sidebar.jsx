@@ -1,8 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
-import NavbarTitle from "./NavbarTitle";
 import useAuth from "../../../hooks/useAuth";
 import useManager from "../../../hooks/useManager";
 import useAdmin from "../../../hooks/useAdmin";
+import Logo from "../Logo/Logo";
 
 const Sidebar = () => {
   const { user, logoutUser } = useAuth();
@@ -12,7 +12,7 @@ const Sidebar = () => {
     <div>
       <ul className="menu p-4 w-60 min-h-screen bg-white  mb-10 text-lg">
         <div className="mb-8 ml-4">
-          <NavbarTitle></NavbarTitle>
+          <Logo></Logo>
         </div>
         {/* Sidebar content here */}
         <NavLink to="/" className={({ isActive }) => (isActive ? "text-yellow-300 ml-6 mb-1" : "text-[#1B2850] ml-6 mb-1")}>
