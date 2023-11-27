@@ -10,7 +10,7 @@ const CreateStore = () => {
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
-  const handleAddProduct = async (e) => {
+  const handleCreateShop = async (e) => {
     e.preventDefault();
     setLoading(true);
     const form = e.target;
@@ -38,14 +38,14 @@ const CreateStore = () => {
       if (res.data.insertedId) {
         Swal.fire({
           title: "Success!",
-          text: "Book added successfully",
+          text: "Shop Created Successfully",
           icon: "success",
           confirmButtonText: "Cool",
         });
       }
-      navigate("/dashboard");
+      navigate("/dashboard/manage-product");
     } catch (err) {
-      console.log("🚀 ~ file: CreateStore.jsx:27 ~ handleAddProduct ~ err:", err);
+      console.log("🚀 ~ file: CreateStore.jsx:27 ~ handleCreateShop ~ err:", err);
     }
   };
 
@@ -53,7 +53,7 @@ const CreateStore = () => {
     <div className="min-h-screen bg-[#FAFBFE] z-0">
       <div className="max-w-screen-lg mx-auto pt-10 ">
         <h2 className="text-5xl font-bold border-l-8 border-[#FF792E] text-[#1B2850] pl-4 mb-10 ml-5 ">Create Your Store</h2>
-        <form className="px-5 border bg-white p-7 mb-10 rounded-md mx-3 lg:mx-0" onSubmit={handleAddProduct}>
+        <form className="px-5 border bg-white p-7 mb-10 rounded-md mx-3 lg:mx-0" onSubmit={handleCreateShop}>
           {/* form row */}
           <div className="flex gap-5 mb-5">
             <div className="w-1/2">

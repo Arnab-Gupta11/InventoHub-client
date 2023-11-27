@@ -24,7 +24,10 @@ const Sidebar = () => {
           </NavLink>
         )}
         {(isAdmin || isManager) && (
-          <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "text-yellow-300 ml-6 mb-1" : "text-[#1B2850] ml-6 mb-1")}>
+          <NavLink
+            to={isManager ? "/dashboard/manage-product" : "/dashboard"}
+            className={({ isActive }) => (isActive ? "text-yellow-300 ml-6 mb-1" : "text-[#1B2850] ml-6 mb-1")}
+          >
             Dashboard
           </NavLink>
         )}

@@ -1,7 +1,9 @@
+import ManageProductTitle from "./ManageProductTitle";
+
 const ManageProduct = () => {
   return (
-    <div>
-      <h2>add</h2>
+    <div className="py-5 px-8">
+      <ManageProductTitle></ManageProductTitle>
     </div>
   );
 };

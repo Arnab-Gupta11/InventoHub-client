@@ -12,6 +12,7 @@ import SalesCollection from "../pages/Dashboard/Manager/SalesCollection/SalesCol
 import CheckOut from "../pages/Dashboard/Manager/CheckOut/CheckOut";
 import Subscription from "../pages/Dashboard/Manager/Subscription/Subscription";
 import SalesSummary from "../pages/Dashboard/Manager/SalesSummary/SalesSummary";
+import AddProduct from "../pages/Dashboard/Manager/ManageProduct/AddProduct/AddProduct";
 
 const router = createBrowserRouter([
   {
@@ -45,14 +46,16 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard></Dashboard>,
     children: [
+      //* <----------------------Manager-Route----------------------->*/
       {
         path: "manage-product",
         element: <ManageProduct></ManageProduct>,
       },
       {
-        path: "sales-collection",
-        element: <SalesCollection></SalesCollection>,
+        path: "manage-product/addProduct",
+        element: <AddProduct></AddProduct>,
       },
+
       {
         path: "sales-collection",
         element: <SalesCollection></SalesCollection>,
