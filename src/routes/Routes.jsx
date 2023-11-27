@@ -14,6 +14,8 @@ import Subscription from "../pages/Dashboard/Manager/Subscription/Subscription";
 import SalesSummary from "../pages/Dashboard/Manager/SalesSummary/SalesSummary";
 import AddProduct from "../pages/Dashboard/Manager/ManageProduct/AddProduct/AddProduct";
 import UpdateProduct from "../pages/Dashboard/Manager/ManageProduct/AddProduct/UpdateProduct/UpdateProduct";
+import ManageShop from "../pages/Dashboard/Admin/Manage Shop/ManageShop";
+import AdminSummary from "../pages/Dashboard/Admin/AdminSummary/AdminSummary";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,14 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard></Dashboard>,
     children: [
+      {
+        path: "manage-shop",
+        element: <ManageShop></ManageShop>,
+      },
+      {
+        path: "admin-summary",
+        element: <AdminSummary></AdminSummary>,
+      },
       //* <----------------------Manager-Route----------------------->*/
       {
         path: "manage-product",

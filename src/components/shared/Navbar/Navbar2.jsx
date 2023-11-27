@@ -70,7 +70,7 @@ const Navbar2 = () => {
               )}
               {(isAdmin || isManager) && (
                 <NavLink
-                  to={isManager ? "/dashboard/manage-product" : "/dashboard"}
+                  to={isManager ? "/dashboard/manage-product" : "/dashboard/manage-shop"}
                   className={({ isActive }) => (isActive ? "text-yellow-300 uppercase font-bold" : "text-white uppercase font-bold")}
                 >
                   Dashboard
