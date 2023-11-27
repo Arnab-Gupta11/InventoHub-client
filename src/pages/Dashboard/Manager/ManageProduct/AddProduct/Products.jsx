@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { BiEditAlt } from "react-icons/bi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";

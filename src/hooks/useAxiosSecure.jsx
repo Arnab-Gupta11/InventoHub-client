@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
-
+//https://inventohub.vercel.app
+//http://localhost:5000
 const axiosSecure = axios.create({
   baseURL: "http://localhost:5000",
 });
