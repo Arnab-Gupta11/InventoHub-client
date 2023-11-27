@@ -1,18 +1,39 @@
 import { ImSpinner9 } from "react-icons/im";
 import Swal from "sweetalert2";
-import useAuth from "../../../../../hooks/useAuth";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import imageUpload from "../../../../../api/utils";
-import Button2 from "../../../../../components/shared/Button2/Button2";
-import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 
-const AddProduct = () => {
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
+import useAuth from "../../../../../../hooks/useAuth";
+import useAxiosSecure from "../../../../../../hooks/useAxiosSecure";
+import imageUpload from "../../../../../../api/utils";
+import Button2 from "../../../../../../components/shared/Button2/Button2";
+
+const UpdateProduct = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const handleAddProduct = async (e) => {
+  const { id } = useParams();
+
+  const [myData, setMyData] = useState({});
+
+  // using Promises
+  useEffect(() => {
+    axiosSecure.get(`/products/${user?.email}/${id}`).then((response) => setMyData(response.data));
+  }, [axiosSecure, id, user.email]);
+
+  const {
+    product_name,
+    product_location,
+    product_quantity,
+    production_cost,
+    profit_margin,
+    discount,
+    product_description,
+    product_image: img,
+  } = myData;
+  const handleUpdateProduct = async (e) => {
     e.preventDefault();
     setLoading(true);
     const form = e.target;
@@ -26,17 +47,16 @@ const AddProduct = () => {
 
     //save image
     const image = form.image.files[0];
-    const imageData = await imageUpload(image);
-    const product_image = imageData?.data?.display_url;
-
-    const currentDate = new Date();
-    const currentDay = currentDate.toISOString().split("T")[0];
+    if (form.image.files[0]) {
+      let imageData = await imageUpload(image);
+      var product_image = imageData?.data?.display_url;
+    } else {
+      product_image = img;
+    }
 
     // // Send data to the server
     try {
-      const response = await axiosSecure.get(`/users/manager/${user?.email}`);
-
-      const newProduct = {
+      const updatedProduct = {
         product_name,
         product_location,
         product_quantity,
@@ -45,35 +65,31 @@ const AddProduct = () => {
         discount,
         product_image,
         product_description,
-        shopId: response.data.user.shopId,
-        shopName: response.data.user.shop_name,
-        userEmail: response.data.user.email,
         sellingPrice: parseInt(production_cost * ((100 + 7.5 + profit_margin) / 100)),
-        product_addDate: currentDay,
-        saleCount: 0,
       };
 
-      const res = await axiosSecure.post("/products", newProduct);
+      const res = await axiosSecure.put(`/products/${user?.email}/${id}`, updatedProduct);
       setLoading(false);
+      console.log("🚀 ~ file: UpdateProduct.jsx:59 ~ handleUpdateProduct ~ res:", res);
 
-      if (res.data.insertedId) {
+      if (res.data.modifiedCount) {
         Swal.fire({
           title: "Success!",
-          text: "Product added successfully",
+          text: "Product updated successfully",
           icon: "success",
           confirmButtonText: "Cool",
         });
       }
       navigate("/dashboard/manage-product");
     } catch (err) {
-      console.log("🚀 ~ file: CreateStore.jsx:27 ~ handleAddProduct ~ err:", err);
+      console.log("🚀 ~ file: CreateStore.jsx:27 ~ handleUpdateProduct ~ err:", err);
     }
   };
   return (
     <div className="min-h-screen bg-[#FAFBFE] z-0">
       <div className="px-2 md:px-8 mx-auto py-5 ">
-        <h2 className="text-3xl font-bold border-l-8 border-[#FF792E] text-[#1B2850] pl-4 mb-6 ml-5 ">Add new product</h2>
-        <form className="px-5 border bg-white p-7 mb-10 rounded-md mx-3 lg:mx-0" onSubmit={handleAddProduct}>
+        <h2 className="text-3xl font-bold border-l-8 border-[#FF792E] text-[#1B2850] pl-4 mb-6 ml-5 ">Update Product</h2>
+        <form className="px-5 border bg-white p-7 mb-10 rounded-md mx-3 lg:mx-0" onSubmit={handleUpdateProduct}>
           {/* form row */}
           <div className="flex gap-5 mb-5">
             <div className="w-1/2">
@@ -84,6 +100,7 @@ const AddProduct = () => {
                 required
                 type="text"
                 name="name"
+                defaultValue={product_name}
                 placeholder="Enter Product Name"
                 id=""
                 className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block w-full py-3 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
@@ -95,6 +112,7 @@ const AddProduct = () => {
               </label>
               <input
                 required
+                defaultValue={product_location}
                 type="text"
                 name="location"
                 placeholder="Enter Product Location"
@@ -110,6 +128,7 @@ const AddProduct = () => {
                 Product Quantity
               </label>
               <input
+                defaultValue={product_quantity}
                 required
                 type="text"
                 name="quantity"
@@ -120,13 +139,14 @@ const AddProduct = () => {
             </div>
             <div className="w-1/2">
               <label className="text-[#1B2850]" htmlFor="">
-                Production Cost
+                Buying price
               </label>
               <input
+                defaultValue={production_cost}
                 required
                 type="text"
                 name="cost"
-                placeholder="Enter Production Cost"
+                placeholder="Enter Buying Price"
                 id=""
                 className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block w-full py-3 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
               />
@@ -139,6 +159,7 @@ const AddProduct = () => {
                 Profit Margin ( )%
               </label>
               <input
+                defaultValue={profit_margin}
                 placeholder="Enter Profit Margin"
                 type="text"
                 name="profit"
@@ -150,6 +171,7 @@ const AddProduct = () => {
                 Discount ( )%
               </label>
               <input
+                defaultValue={discount}
                 placeholder="Enter Discount"
                 type="text"
                 name="discount"
@@ -181,6 +203,7 @@ const AddProduct = () => {
               Product Description
             </label>
             <textarea
+              defaultValue={product_description}
               className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block w-full py-3 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
               name="desc"
               id=""
@@ -198,7 +221,7 @@ const AddProduct = () => {
                   <ImSpinner9 />
                 </span>
               ) : (
-                "Add Product"
+                "Update Product"
               )}
             </Button2>
           </div>
@@ -208,4 +231,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default UpdateProduct;
