@@ -12,7 +12,7 @@ const PrivateRoute = ({ children }) => {
     return (
       <div className="flex justify-center mt-5 min-h-screen items-center">
         {/* <Lottie className="w-36" animationData={loadingAnimation} loop={true} /> */}
-        <p>loading</p>
+        <progress className="progress w-56"></progress>;
       </div>
     );
   }

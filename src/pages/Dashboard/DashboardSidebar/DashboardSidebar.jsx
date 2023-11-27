@@ -1,4 +1,9 @@
+import { NavLink } from "react-router-dom";
 import Logo from "../../../components/shared/Logo/Logo";
+import { FaBox } from "react-icons/fa";
+import { IoCart } from "react-icons/io5";
+import { FaClipboardCheck } from "react-icons/fa6";
+import { MdSummarize, MdPayment } from "react-icons/md";
 
 const DashboardSidebar = () => {
   return (
@@ -9,13 +14,82 @@ const DashboardSidebar = () => {
         <div className="my-4 ml-4">
           <Logo></Logo>
         </div>
-        <div className="mt-3 space-y-5">
-          <li>
-            <a>Sidebar Item 1</a>
-          </li>
-          <li>
-            <a>Sidebar Item 2</a>
-          </li>
+        <div className="mt-4 space-y-3">
+          <div>
+            <NavLink
+              to="/dashboard/manage-product"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-white bg-[#1B2850] pr-28 pl-5 py-2.5 rounded-md  font-medium flex items-center gap-2"
+                  : "text-[#828f9a]  pr-28 pl-5 py-2.5 rounded-md  font-medium flex items-center gap-2"
+              }
+            >
+              <span>
+                <FaBox />
+              </span>
+              Mange Product
+            </NavLink>
+          </div>
+          <div>
+            <NavLink
+              to="/dashboard/sales-collection"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-white bg-[#1B2850] pr-28 pl-5 py-2.5 rounded-md  font-medium flex items-center gap-2"
+                  : "text-[#828f9a]  pr-28 pl-5 py-2.5 rounded-md  font-medium flex items-center gap-2"
+              }
+            >
+              <span>
+                <IoCart />
+              </span>
+              Sales Collection
+            </NavLink>
+          </div>
+          <div>
+            <NavLink
+              to="/dashboard/check-out"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-white bg-[#1B2850] pr-28 pl-5 py-2.5 rounded-md  font-medium flex items-center gap-2"
+                  : "text-[#828f9a]  pr-28 pl-5 py-2.5 rounded-md  font-medium flex items-center gap-2"
+              }
+            >
+              <span>
+                <FaClipboardCheck></FaClipboardCheck>
+              </span>
+              Check Out
+            </NavLink>
+          </div>
+          <div>
+            <NavLink
+              to="/dashboard/subscription"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-white bg-[#1B2850] pr-28 pl-5 py-2.5 rounded-md  font-medium flex items-center gap-2"
+                  : "text-[#828f9a]  pr-28 pl-5 py-2.5 rounded-md  font-medium flex items-center gap-2"
+              }
+            >
+              <span>
+                <MdPayment />
+              </span>
+              Subscription
+            </NavLink>
+          </div>
+          <div>
+            <NavLink
+              to="/dashboard/sales-summary"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-white bg-[#1B2850] pr-28 pl-5 py-2.5 rounded-md  font-medium flex items-center gap-2"
+                  : "text-[#828f9a]  pr-28 pl-5 py-2.5 rounded-md  font-medium flex items-center gap-2"
+              }
+            >
+              <span>
+                <MdSummarize />
+              </span>
+              Sales Summary
+            </NavLink>
+          </div>
         </div>
       </ul>
     </div>

@@ -7,7 +7,7 @@ import useAuth from "../../../hooks/useAuth";
 const DashboardNav = () => {
   const { user, logoutUser } = useAuth();
   return (
-    <div className="bg-white shadow-2xl w-full flex justify-evenly md:justify-end items-center  md:gap-6 py-4 md:pr-10">
+    <div className="bg-white shadow-2xl shadow-black w-full flex justify-evenly md:justify-end items-center  md:gap-6 py-4 md:pr-10">
       <Link to={"/"}>
         <span className="text-2xl text-[#1B2850]">
           <IoHome />
