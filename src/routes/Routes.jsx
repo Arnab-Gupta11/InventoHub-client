@@ -16,6 +16,7 @@ import AddProduct from "../pages/Dashboard/Manager/ManageProduct/AddProduct/AddP
 import UpdateProduct from "../pages/Dashboard/Manager/ManageProduct/AddProduct/UpdateProduct/UpdateProduct";
 import ManageShop from "../pages/Dashboard/Admin/Manage Shop/ManageShop";
 import AdminSummary from "../pages/Dashboard/Admin/AdminSummary/AdminSummary";
+import Payment from "../pages/Dashboard/Manager/Subscription/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +83,11 @@ const router = createBrowserRouter([
       {
         path: "subscription",
         element: <Subscription></Subscription>,
+      },
+      {
+        path: "subscription/:id",
+        element: <Payment></Payment>,
+        loader: ({ params }) => fetch(`http://localhost:5000/subscription/${params.id}`),
       },
       {
         path: "sales-summary",
