@@ -1,7 +1,9 @@
+import Users from "./Users";
+
 const AdminSummary = () => {
   return (
     <div>
-      <h2>summary</h2>
+      <Users></Users>
     </div>
   );
 };

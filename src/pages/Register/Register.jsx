@@ -25,22 +25,20 @@ const Register = () => {
     try {
       //1.upload image
       const imageData = await imageUpload(image);
-      console.log("🚀 ~ file: Register.jsx:26 ~ onSubmit ~ imageData:", imageData);
       // 2.user registration
-      const result = await registerUser(data.email, data.password);
-      console.log("🚀 ~ file: Register.jsx:28 ~ onSubmit ~ result:", result);
+      await registerUser(data.email, data.password);
 
       //3.Update user profile
       await updateUserProfile(data.name, imageData?.data?.display_url);
 
       const currentUser = {
         email: data.email,
+        name: data.name,
         role: "guest",
         status: "verified",
       };
-      const res = await axiosPublic.post(`/users`, currentUser);
+      await axiosPublic.post(`/users`, currentUser);
 
-      console.log("🚀 ~ file: Register.jsx:43 ~ onSubmit ~ data:", res.data);
       toast.success("User signup successfully");
       reset();
       navigate("/");
@@ -60,6 +58,7 @@ const Register = () => {
       // 4.Save User
       const currentUser = {
         email: result?.user?.email,
+        name: result?.user?.displayName,
         role: "guest",
         status: "verified",
       };

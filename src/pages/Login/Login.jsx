@@ -26,7 +26,6 @@ const Login = () => {
     try {
       // 2.user login
       await loginUser(data.email, data.password);
-      //   console.log("🚀 ~ file: Register.jsx:28 ~ onSubmit ~ result:", result);
 
       toast.success("User signin successfully");
       reset();
@@ -47,6 +46,7 @@ const Login = () => {
       // 4.Save User
       const currentUser = {
         email: result?.user?.email,
+        name: result?.user.displayName,
         role: "guest",
         status: "verified",
       };

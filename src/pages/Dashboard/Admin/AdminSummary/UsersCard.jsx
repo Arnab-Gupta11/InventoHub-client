@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import Button2 from "../../../../components/shared/Button2/Button2";
-
-const ManageShopCard = ({ shop }) => {
-  const { shop_name, shop_logo, shop_info, productLimit } = shop;
+import { IoMailSharp } from "react-icons/io5";
+const UsersCard = ({ user }) => {
+  const { shop_name, shop_logo, name, email, role } = user;
   return (
     <tr>
       <td>
@@ -14,19 +14,22 @@ const ManageShopCard = ({ shop }) => {
             </div>
           </div>
           <div>
-            <div className="font-semibold">{shop_name}</div>
+            <div className="font-semibold">{name}</div>
           </div>
         </div>
       </td>
-      <td className="text-[#637381] font-medium">{productLimit}</td>
-      <td className="text-[#637381] font-medium">{shop_info}</td>
+      <td className="text-[#637381] font-medium">{email}</td>
+      <td className="text-[#637381] font-medium">{shop_name || "____________"}</td>
+      <td className="text-[#637381] font-medium">{role}</td>
       <td className="flex items-center gap-4">
         <Link>
-          <Button2>Send Notice</Button2>
+          <Button2>
+            <IoMailSharp></IoMailSharp>
+          </Button2>
         </Link>
       </td>
     </tr>
   );
 };
 
-export default ManageShopCard;
+export default UsersCard;

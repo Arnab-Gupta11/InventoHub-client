@@ -5,11 +5,13 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 const CreateStore = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const handleCreateShop = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -30,7 +32,7 @@ const CreateStore = () => {
     // // Send data to the server
     try {
       const res = await axiosPublic.post("/shops", newStore);
-      const { data } = await axiosPublic.get(`/shops/${user?.email}`);
+      const { data } = await axiosSecure.get(`/shops/${user?.email}`);
       const updateUserInfo = { shop_name, shop_logo, role: "manager", shopId: data?._id };
       await axiosPublic.patch(`/users/manager/${user?.email}`, updateUserInfo);
       setLoading(false);
