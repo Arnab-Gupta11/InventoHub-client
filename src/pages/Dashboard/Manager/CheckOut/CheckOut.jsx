@@ -80,7 +80,7 @@ const CheckOut = () => {
     });
 
     // Save the PDF or open in a new tab
-    doc.save("generated-pdf.pdf");
+    doc.save("Invoice.pdf");
   };
   return (
     <div>

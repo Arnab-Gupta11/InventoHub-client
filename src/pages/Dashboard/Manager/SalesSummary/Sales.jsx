@@ -2,10 +2,10 @@ import DashContainer from "../../../../components/shared/DashContainer/DashConta
 import Loader from "../../../../components/shared/Loader/Loader";
 import useSales from "../../../../hooks/useSales";
 import SalesCard from "./SalesCard";
+import SalesState from "./SalesState";
 
 const Sales = () => {
   const [result, isLoading] = useSales();
-  console.log("🚀 ~ file: Sales.jsx:8 ~ Sales ~ result:", result);
   if (isLoading === true) {
     return <Loader></Loader>;
   }
@@ -14,6 +14,7 @@ const Sales = () => {
       <div>
         {result.length > 0 ? (
           <div className="py-5 px-8">
+            <SalesState />
             <DashContainer>
               <h2 className="text-xl md:text-3xl text-[#1B2850] font-semibold ml-1 mb-5">Total {result.length} Product Sold</h2>
               <div>
