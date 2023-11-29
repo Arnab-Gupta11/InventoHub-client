@@ -1,7 +1,9 @@
+import Sales from "./Sales";
+
 const SalesSummary = () => {
   return (
     <div>
-      <h2>sales</h2>
+      <Sales></Sales>
     </div>
   );
 };

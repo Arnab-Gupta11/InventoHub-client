@@ -5,8 +5,8 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../../hooks/useAuth";
 import PropTypes from "prop-types";
+import useSingleShop from "../../../../../hooks/useSingleShop";
 const CheckoutForm = ({ result }) => {
-  // console.log("🚀 ~ file: CheckoutForm.jsx:11 ~ CheckoutForm ~ id:", id);
   const axiosSecure = useAxiosSecure();
   const stripe = useStripe();
   const elements = useElements();
@@ -17,7 +17,20 @@ const CheckoutForm = ({ result }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
 
-  const { price: totalPrice } = result;
+  const { price: totalPrice, limit: range } = result;
+
+  //single shop
+  const { shop } = useSingleShop();
+  const { productLimit } = shop;
+
+  //get Admin
+  const [myData, setMyData] = useState({});
+
+  // using Promises
+  useEffect(() => {
+    axiosSecure.get("/users/admin").then((response) => setMyData(response.data));
+  }, [axiosSecure]);
+  const { income } = myData;
 
   useEffect(() => {
     axiosSecure.post("/api/create-payment-intent", { price: totalPrice }).then((res) => {
@@ -69,31 +82,26 @@ const CheckoutForm = ({ result }) => {
     }
 
     //     // now save the payment in the database
-    //     const payment = {
-    //       email: user.email,
-    //       price: totalPrice,
-    //       transactionId: paymentIntent.id,
-    //       date: new Date(), // utc date convert. use moment js to
-    //       // cartIds: cart.map((item) => item._id),
-    //       // menuItemIds: cart.map((item) => item.menuId),
-    //       status: "pending",
-    //     };
+    const limit = {
+      productLimit: productLimit + range,
+    };
+    const newIncome = {
+      income: income + totalPrice,
+    };
+    // console.log(limit);
+    const res = await axiosSecure.patch(`/shops/${user.email}`, limit);
+    await axiosSecure.patch(`/users/admin`, newIncome);
 
-    //     const res = await axiosSecure.post("/payments", payment);
-    //     console.log("payment saved", res.data);
-    //     // refetch();
-    //     if (res.data?.paymentResult?.insertedId) {
-    //       Swal.fire({
-    //         position: "top-end",
-    //         icon: "success",
-    //         title: "Thank you for the taka paisa",
-    //         showConfirmButton: false,
-    //         timer: 1500,
-    //       });
-    //       navigate("/dashboard/paymentHistory");
-    //     }
-    //   }
-    // }
+    if (res.data?.modifiedCount) {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Payment Successfull!! Your shop product limit increases.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/dashboard/subscription");
+    }
   };
   return (
     <div>
