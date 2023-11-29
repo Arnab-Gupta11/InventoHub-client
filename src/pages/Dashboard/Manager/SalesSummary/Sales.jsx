@@ -1,14 +1,23 @@
+import { useState } from "react";
 import DashContainer from "../../../../components/shared/DashContainer/DashContainer";
 import Loader from "../../../../components/shared/Loader/Loader";
+import Pagination from "../../../../components/shared/Pagination/Pagination";
 import useSales from "../../../../hooks/useSales";
 import SalesCard from "./SalesCard";
 import SalesState from "./SalesState";
 
 const Sales = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  // eslint-disable-next-line no-unused-vars
+  const [postsPerPage, setPostsPerPage] = useState(8);
   const [result, isLoading] = useSales();
   if (isLoading === true) {
     return <Loader></Loader>;
   }
+
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentPosts = result.slice(firstPostIndex, lastPostIndex);
   return (
     <div>
       <div>
@@ -18,8 +27,8 @@ const Sales = () => {
             <DashContainer>
               <h2 className="text-xl md:text-3xl text-[#1B2850] font-semibold ml-1 mb-5">Total {result.length} Product Sold</h2>
               <div>
-                <div className="overflow-x-auto ">
-                  <table className="table w-full">
+                <div className="overflow-x-auto min-h-[450px]">
+                  <table className="table w-full ">
                     {/* head */}
                     <thead>
                       <tr className="text-base text-[#1B2850] font-normal bg-[#FAFBFE] border-none rounded-md">
@@ -29,12 +38,13 @@ const Sales = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {result?.map((saleProduct) => (
+                      {currentPosts?.map((saleProduct) => (
                         <SalesCard key={saleProduct._id} saleProduct={saleProduct}></SalesCard>
                       ))}
                     </tbody>
                   </table>
                 </div>
+                <Pagination totalPosts={result.length} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} />
               </div>
             </DashContainer>
           </div>

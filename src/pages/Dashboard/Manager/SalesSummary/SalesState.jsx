@@ -5,8 +5,10 @@ import { FaBox } from "react-icons/fa6";
 
 const SalesState = () => {
   const [sales] = useSales();
-  const [products] = useProducts();
-  const totalInvest = products.reduce((total, item) => total + item.product_quantity * item.production_cost, 0);
+  const [result] = useProducts();
+  console.log("🚀 ~ file: SalesState.jsx:9 ~ SalesState ~ products:", result);
+  const totalInvest = result?.reduce((total, item) => total + item.product_quantity * item.production_cost, 0);
+  console.log("🚀 ~ file: SalesState.jsx:10 ~ SalesState ~ totalInvest:", totalInvest);
   const totalProfit = sales.reduce((total, item) => total + (item.sellingPrice - item.production_cost), 0);
 
   return (

@@ -1,14 +1,22 @@
+import { useState } from "react";
 import DashContainer from "../../../../components/shared/DashContainer/DashContainer";
 import Loader from "../../../../components/shared/Loader/Loader";
+import Pagination from "../../../../components/shared/Pagination/Pagination";
 import useUsers from "../../../../hooks/useUsers";
 import SummaryCard from "./SummaryCard";
 import UsersCard from "./UsersCard";
 
 const Users = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  // eslint-disable-next-line no-unused-vars
+  const [postsPerPage, setPostsPerPage] = useState(8);
   const [result, isLoading] = useUsers();
   if (isLoading === true) {
     return <Loader></Loader>;
   }
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentPosts = result.slice(firstPostIndex, lastPostIndex);
   return (
     <div>
       <div>
@@ -18,7 +26,7 @@ const Users = () => {
             <DashContainer>
               <h2 className="text-xl md:text-3xl text-[#1B2850] font-semibold ml-1 mb-5">Total {result.length} Users</h2>
               <div>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto min-h-[450px]">
                   <table className="table">
                     {/* head */}
                     <thead>
@@ -31,12 +39,18 @@ const Users = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {result?.map((user) => (
+                      {currentPosts?.map((user) => (
                         <UsersCard key={user._id} user={user}></UsersCard>
                       ))}
                     </tbody>
                   </table>
                 </div>
+                <Pagination
+                  totalPosts={result.length}
+                  postsPerPage={postsPerPage}
+                  setCurrentPage={setCurrentPage}
+                  currentPage={currentPage}
+                ></Pagination>
               </div>
             </DashContainer>
           </div>

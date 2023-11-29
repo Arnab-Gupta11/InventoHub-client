@@ -4,20 +4,22 @@ import useAuth from "./useAuth";
 
 const useProducts = () => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const {
     refetch,
-    data: result = {},
+    data: result = [],
     isLoading,
+    isPending,
   } = useQuery({
     queryKey: ["products", user?.email],
+    enabled: !loading,
     queryFn: async () => {
       const res = await axiosSecure.get(`/products/${user.email}`);
       return res.data;
     },
   });
 
-  return [result, refetch, isLoading];
+  return [result, refetch, isLoading, isPending];
 };
 
 export default useProducts;
