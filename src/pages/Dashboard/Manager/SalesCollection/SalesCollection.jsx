@@ -4,24 +4,39 @@ import DashContainer from "../../../../components/shared/DashContainer/DashConta
 import SalesCollectionCart from "./SalesCollectionCart";
 
 import { IoSearchSharp } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import useAuth from "../../../../hooks/useAuth";
 const SalesCollection = () => {
   const [searchText, setSearchText] = useState("");
-  const [result, refetch, isLoading] = useProducts(searchText);
+  const [result, refetch, isLoading] = useProducts();
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const [myData, setMyData] = useState([]);
+  useEffect(() => {
+    setMyData(result);
+  }, [result]);
 
   if (isLoading === true) {
     return <Loader></Loader>;
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const searchText = e.target.search.value;
     setSearchText(searchText);
+    const singleData = await axiosSecure.get(`/products/${user.email}/${searchText}`);
+
+    if (searchText) {
+      setMyData([singleData.data]);
+    } else {
+      setMyData(result);
+    }
   };
   console.log(searchText);
   return (
     <div>
-      {result.length > 0 ? (
+      {myData.length > 0 ? (
         <div className="py-5 px-8">
           <h2 className="text-xl md:text-3xl text-[#1B2850] font-semibold ml-1">All Product</h2>
           <DashContainer>
@@ -57,7 +72,7 @@ const SalesCollection = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {result?.map((product) => (
+                    {myData?.map((product) => (
                       <SalesCollectionCart key={product._id} product={product} refetch={refetch}></SalesCollectionCart>
                     ))}
                   </tbody>

@@ -12,7 +12,7 @@ const Subscription = () => {
   }, [axiosSecure]);
   return (
     <div className=" max-w-screen-lg mx-auto min-h-screen flex justify-center">
-      <div className="flex items-center justify-between gap-5 text-white">
+      <div className="flex items-center justify-between flex-col lg:flex-row gap-5 text-white">
         {myData?.map((data) => (
           <SubscriptionCard key={data._id} data={data}></SubscriptionCard>
         ))}

@@ -17,8 +17,8 @@ const Sales = () => {
             <DashContainer>
               <h2 className="text-xl md:text-3xl text-[#1B2850] font-semibold ml-1 mb-5">Total {result.length} Product Sold</h2>
               <div>
-                <div className="overflow-x-auto">
-                  <table className="table">
+                <div className="overflow-x-auto ">
+                  <table className="table w-full">
                     {/* head */}
                     <thead>
                       <tr className="text-base text-[#1B2850] font-normal bg-[#FAFBFE] border-none rounded-md">
