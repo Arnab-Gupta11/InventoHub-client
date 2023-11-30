@@ -6,7 +6,14 @@ const Form = () => {
   };
   return (
     <div className=" max-w-lg mx-auto ">
-      <form className="w-full px-3 lg:pl-11 py-10" style={shadow}>
+      <form
+        className="w-full px-3 lg:pl-11 py-10"
+        style={shadow}
+        data-aos="fade-zoom-in"
+        data-aos-easing="ease-in-back"
+        data-aos-delay="200"
+        data-aos-offset="0"
+      >
         <div className="flex gap-2 lg:gap-8">
           <div>
             <div className="mb-5">

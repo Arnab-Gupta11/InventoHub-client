@@ -7,6 +7,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 const SalesCollection = () => {
   const [searchText, setSearchText] = useState("");
   const [result, refetch, isLoading] = useProducts();
@@ -36,6 +37,9 @@ const SalesCollection = () => {
   console.log(searchText);
   return (
     <div>
+      <Helmet>
+        <title> Inventohub | Sales Collection </title>
+      </Helmet>
       {myData.length > 0 ? (
         <div className="py-5 px-8">
           <h2 className="text-xl md:text-3xl text-[#1B2850] font-semibold ml-1">All Product</h2>

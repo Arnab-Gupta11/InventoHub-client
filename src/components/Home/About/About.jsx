@@ -7,7 +7,7 @@ const About = () => {
       <Section>
         <div className="hero h-[500px] rounded-3xl " style={{ backgroundImage: `url(${about}) ` }}>
           <div className="hero-overlay bg-opacity-70 bg-black rounded-3xl"></div>
-          <div className="hero-content text-center text-neutral-content">
+          <div className="hero-content text-center text-neutral-content" data-aos="zoom-in">
             <div className="max-w-4xl">
               <h1 className="mb-5 text-5xl font-bold">
                 <span className="text-[#FF792E]">About</span> us

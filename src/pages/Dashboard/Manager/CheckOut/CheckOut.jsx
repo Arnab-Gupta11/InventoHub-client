@@ -6,6 +6,7 @@ import useCarts from "../../../../hooks/useCarts";
 import Button2 from "../../../../components/shared/Button2/Button2";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import jsPDF from "jspdf";
+import { Helmet } from "react-helmet-async";
 const CheckOut = () => {
   const [result, refetch, isLoading] = useCarts();
   const axiosSecure = useAxiosSecure();
@@ -84,6 +85,9 @@ const CheckOut = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title> Inventohub | Check Out </title>
+      </Helmet>
       {result.length > 0 ? (
         <div className="py-5 px-8">
           <div className="flex justify-between items-center">

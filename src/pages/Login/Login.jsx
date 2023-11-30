@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 
 import Lottie from "lottie-react";
@@ -9,11 +9,12 @@ import useAuth from "../../hooks/useAuth";
 import NavbarTitle from "../../components/shared/Navbar/NavbarTitle";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { Helmet } from "react-helmet-async";
 const Login = () => {
   const axiosPublic = useAxiosPublic();
   const { loginUser, googleSignIn } = useAuth();
   const navigate = useNavigate();
-  //   const location = useLocation();
+  const location = useLocation();
   const {
     register,
     handleSubmit,
@@ -29,7 +30,7 @@ const Login = () => {
 
       toast.success("User signin successfully");
       reset();
-      navigate("/");
+      navigate(location?.state ? location.state : "/");
     } catch (err) {
       toast.error(err.message);
     }
@@ -55,7 +56,8 @@ const Login = () => {
       //5.get Token
       //   await getToken(result?.user?.email);
       toast.success("User signin successfully");
-      navigate("/");
+
+      navigate(location?.state ? location.state : "/");
     } catch (err) {
       console.log(err);
       toast.error(err.message);
@@ -67,6 +69,9 @@ const Login = () => {
   };
   return (
     <div className="min-h-screen bg-[#FAFBFE] z-0 pt-10 font-crimson">
+      <Helmet>
+        <title>Inventohub | Login</title>
+      </Helmet>
       <Toaster></Toaster>
       <div className="max-w-screen-xl mx-auto">
         <div className="flex flex-col py-8 items-center lg:flex-row gap-5">

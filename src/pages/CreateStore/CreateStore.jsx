@@ -93,6 +93,7 @@ const CreateStore = () => {
               </label>
               <input
                 defaultValue={user?.displayName}
+                readOnly
                 type="text"
                 name="ownerName"
                 id="ownerName"
@@ -104,6 +105,7 @@ const CreateStore = () => {
                 Shop Owner Email
               </label>
               <input
+                readOnly
                 defaultValue={user?.email}
                 type="text"
                 name="ownerEmail"

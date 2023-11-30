@@ -1,20 +1,16 @@
-import { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
-import { AuthContext } from "../providers/AuthProviders";
+
+import Loader from "../components/shared/Loader/Loader";
+import useAuth from "../hooks/useAuth";
 // import Lottie from "lottie-react";
 // import loadingAnimation from "../assets/loadingAnimation.json";
 const PrivateRoute = ({ children }) => {
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading } = useAuth();
   const location = useLocation();
   // console.log(location);
   if (loading) {
-    return (
-      <div className="flex justify-center mt-5 min-h-screen items-center">
-        {/* <Lottie className="w-36" animationData={loadingAnimation} loop={true} /> */}
-        <progress className="progress w-56"></progress>;
-      </div>
-    );
+    return <Loader></Loader>;
   }
   if (user) {
     return children;

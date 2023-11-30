@@ -17,6 +17,8 @@ import UpdateProduct from "../pages/Dashboard/Manager/ManageProduct/AddProduct/U
 import ManageShop from "../pages/Dashboard/Admin/Manage Shop/ManageShop";
 import AdminSummary from "../pages/Dashboard/Admin/AdminSummary/AdminSummary";
 import Payment from "../pages/Dashboard/Manager/Subscription/Payment/Payment";
+import PrivateRoute from "./PrivateRoute";
+import Unauthorize from "../pages/Error/Unauthorize";
 
 const router = createBrowserRouter([
   {
@@ -30,13 +32,21 @@ const router = createBrowserRouter([
       },
       {
         path: "/create-store",
-        element: <CreateStore></CreateStore>,
+        element: (
+          <PrivateRoute>
+            <CreateStore></CreateStore>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/watch-demo",
         element: <WatchDemo></WatchDemo>,
       },
     ],
+  },
+  {
+    path: "/unauthorize",
+    element: <Unauthorize></Unauthorize>,
   },
   {
     path: "/login",
@@ -87,7 +97,7 @@ const router = createBrowserRouter([
       {
         path: "subscription/:id",
         element: <Payment></Payment>,
-        loader: ({ params }) => fetch(`http://localhost:5000/subscription/${params.id}`),
+        loader: ({ params }) => fetch(`https://inventohub.vercel.app/subscription/${params.id}`),
       },
       {
         path: "sales-summary",

@@ -1,8 +1,8 @@
 import axios from "axios";
-//http://localhost:5000
+//https://inventohub.vercel.app
 //https://inventohub.vercel.app
 const axiosPublic = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://inventohub.vercel.app",
 });
 
 const useAxiosPublic = () => {

@@ -6,7 +6,7 @@ import ManageProductTitle from "./ManageProductTitle";
 import Button2 from "../../../../components/shared/Button2/Button2";
 import { IoMdAdd } from "react-icons/io";
 import Loader from "../../../../components/shared/Loader/Loader";
-
+import { Helmet } from "react-helmet-async";
 const ManageProduct = () => {
   const [result, refetch, isLoading] = useProducts();
 
@@ -15,6 +15,9 @@ const ManageProduct = () => {
   }
   return (
     <div>
+      <Helmet>
+        <title> Inventohub | Manage Product </title>
+      </Helmet>
       {result.length > 0 ? (
         <div className="py-5 px-8">
           <ManageProductTitle productCount={result.length}></ManageProductTitle>

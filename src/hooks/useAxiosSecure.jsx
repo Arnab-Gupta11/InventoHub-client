@@ -2,9 +2,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 //https://inventohub.vercel.app
-//http://localhost:5000
+//https://inventohub.vercel.app
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://inventohub.vercel.app",
 });
 const useAxiosSecure = () => {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ const useAxiosSecure = () => {
       const status = error.response.status;
       if (status === 401 || status === 403) {
         await logoutUser();
-        navigate("/login");
+        navigate("/unauthorize");
       }
       return Promise.reject(error);
     }

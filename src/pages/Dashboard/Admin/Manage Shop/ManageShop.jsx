@@ -2,7 +2,7 @@ import DashContainer from "../../../../components/shared/DashContainer/DashConta
 import Loader from "../../../../components/shared/Loader/Loader";
 import useShops from "../../../../hooks/useShops";
 import ManageShopCard from "./ManageShopCard";
-
+import { Helmet } from "react-helmet-async";
 const ManageShop = () => {
   const [result, isLoading] = useShops();
   if (isLoading === true) {
@@ -10,6 +10,9 @@ const ManageShop = () => {
   }
   return (
     <div>
+      <Helmet>
+        <title> Inventohub | Manage Shop </title>
+      </Helmet>
       <div>
         {result.length > 0 ? (
           <div className="py-5 px-8">

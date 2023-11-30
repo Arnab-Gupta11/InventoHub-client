@@ -13,11 +13,13 @@ const UsersCard = ({ user }) => {
       <td className="text-[#637381] font-medium">{shop_name || "____________"}</td>
       <td className="text-[#637381] font-medium">{role}</td>
       <td className="flex items-center gap-4">
-        <Link>
-          <Button2>
-            <IoMailSharp></IoMailSharp>
-          </Button2>
-        </Link>
+        {role === "guest" && (
+          <Link>
+            <Button2>
+              <IoMailSharp></IoMailSharp>
+            </Button2>
+          </Link>
+        )}
       </td>
     </tr>
   );

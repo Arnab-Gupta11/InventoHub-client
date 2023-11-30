@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import YouTube from "react-youtube";
 const WatchDemo = () => {
   const videoId = "qQGT74k-g1E";
@@ -18,6 +19,9 @@ const WatchDemo = () => {
   };
   return (
     <div className="px-5  p-7 mb-10 rounded-md max-w-screen-xl mx-auto min-h-screen mt-6">
+      <Helmet>
+        <title>Inventohub | Watch Demo</title>
+      </Helmet>
       <div className="border bg-[#FAFBFE] p-7">
         <YouTube videoId={videoId} opts={opts} onReady={onReady} />
       </div>

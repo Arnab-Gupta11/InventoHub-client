@@ -8,6 +8,7 @@ import NavbarTitle from "../../components/shared/Navbar/NavbarTitle";
 import imageUpload from "../../api/utils";
 import { FcGoogle } from "react-icons/fc";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { Helmet } from "react-helmet-async";
 const Register = () => {
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
@@ -64,8 +65,6 @@ const Register = () => {
       };
       await axiosPublic.post(`/users`, currentUser);
 
-      //5.get Token
-      //   await getToken(result?.user?.email);
       toast.success("User signup successfully");
       navigate("/");
     } catch (err) {
@@ -79,6 +78,9 @@ const Register = () => {
   };
   return (
     <div className="min-h-screen bg-[#FAFBFE] z-0 font-crimson">
+      <Helmet>
+        <title>Inventohub | Register</title>
+      </Helmet>
       <Toaster></Toaster>
       <div className="max-w-screen-xl mx-auto">
         <div className="flex flex-col py-8 items-center lg:flex-row gap-5">

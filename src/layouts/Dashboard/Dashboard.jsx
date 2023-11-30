@@ -1,3 +1,4 @@
+import Footer from "../../components/shared/Footer/Footer";
 import DashboardMain from "../../pages/Dashboard/DashboardMain/DashboardMain";
 import DashboardNav from "../../pages/Dashboard/DashboardNav/DashboardNav";
 import DashboardSidebar from "../../pages/Dashboard/DashboardSidebar/DashboardSidebar";
@@ -10,6 +11,7 @@ const Dashboard = () => {
           {/* Page content here */}
           <DashboardNav></DashboardNav>
           <DashboardMain></DashboardMain>
+          <Footer></Footer>
         </div>
         <DashboardSidebar></DashboardSidebar>
       </div>
