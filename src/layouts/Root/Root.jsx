@@ -8,7 +8,7 @@ const Root = () => {
   const location = useLocation();
 
   return (
-    <div className="font-crimson">
+    <div className="font-Work-Sans">
       <div className="drawer">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
@@ -18,9 +18,9 @@ const Root = () => {
 
           {/* Page content here */}
           <Outlet></Outlet>
-          <Footer></Footer>
+          {/* <Footer></Footer> */}
         </div>
-        <div className="drawer-side z-50 min-h-screen">
+        <div className="drawer-side z-50 min-h-screen w-full">
           <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
           <Sidebar></Sidebar>
         </div>

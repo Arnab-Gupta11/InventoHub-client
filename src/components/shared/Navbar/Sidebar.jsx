@@ -9,49 +9,83 @@ const Sidebar = () => {
   const [isManager] = useManager();
   const [isAdmin] = useAdmin();
   return (
-    <div>
-      <ul className="menu p-4 w-60 min-h-screen bg-white  mb-10 text-lg">
+    <div className="w-52 xsm:w-60 h-full">
+      <ul className="flex flex-col p-4 w-full min-h-screen bg-[#F8F8F8] opacity-90 pt-10  mb-10 text-lg">
         <div className="mb-8 ml-4">
           <Logo></Logo>
         </div>
         {/* Sidebar content here */}
-        <NavLink to="/" className={({ isActive }) => (isActive ? "text-yellow-300 ml-6 mb-1" : "text-[#1B2850] ml-6 mb-1")}>
-          Home
-        </NavLink>
-        {!isAdmin && !isManager && (
-          <NavLink to="/create-store" className={({ isActive }) => (isActive ? "text-yellow-300 ml-6 mb-1" : "text-[#1B2850] ml-6 mb-1")}>
-            Create Store
-          </NavLink>
-        )}
-        {(isAdmin || isManager) && (
+        <div className="space-y-6 flex flex-col mt-7">
           <NavLink
-            to={isManager ? "/dashboard/manage-product" : "/dashboard/manage-shop"}
-            className={({ isActive }) => (isActive ? "text-yellow-300 ml-6 mb-1" : "text-[#1B2850] ml-6 mb-1")}
+            to="/"
+            className={({ isActive }) =>
+              isActive
+                ? "text-light-text-100 font-semibold text-lg shadow-navlink-shadow rounded-md text-center px-1"
+                : "text-light-text-100 font-semibold text-lg text-center"
+            }
           >
-            Dashboard
+            Home
           </NavLink>
-        )}
-        <NavLink to="/watch-demo" className={({ isActive }) => (isActive ? "text-yellow-300 ml-6 mb-1" : "text-[#1B2850] ml-6 mb-1")}>
-          Watch demo
-        </NavLink>
-        <NavLink to="/register" className={({ isActive }) => (isActive ? "text-yellow-300 ml-6 mb-1" : "text-[#1B2850] ml-6 mb-1")}>
-          Register
-        </NavLink>
-        <div>
-          {user ? (
-            <Link to={"/"}>
-              <button
-                onClick={logoutUser}
-                className=" bg-[#FF792E]   px-8 py-2 rounded-md hover:bg-orange-600 hover:duration-500 font-semibold text-white ml-5"
-              >
-                Logout
-              </button>
-            </Link>
-          ) : (
-            <button className=" bg-[#FF792E]   px-8 py-2 rounded-md hover:bg-orange-600 hover:duration-500 font-semibold text-white ml-5">
-              <Link to={"/login"}>Login</Link>
-            </button>
+          {!isAdmin && !isManager && (
+            <NavLink
+              to="/create-store"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-light-text-100 font-semibold text-lg shadow-navlink-shadow rounded-md text-center px-1"
+                  : "text-light-text-100 font-semibold text-center text-lg"
+              }
+            >
+              Create Store
+            </NavLink>
           )}
+          {(isAdmin || isManager) && (
+            <NavLink
+              to={isManager ? "/dashboard/manage-product" : "/dashboard/manage-shop"}
+              className={({ isActive }) =>
+                isActive
+                  ? "text-light-text-100 font-semibold text-lg shadow-navlink-shadow rounded-md text-center px-1"
+                  : "text-light-text-100 font-semibold text-lg text-center"
+              }
+            >
+              Dashboard
+            </NavLink>
+          )}
+          <NavLink
+            to="/watch-demo"
+            className={({ isActive }) =>
+              isActive
+                ? "text-light-text-100 font-semibold text-lg shadow-navlink-shadow text-center rounded-md px-1"
+                : "text-light-text-100 font-semibold text-lg text-center"
+            }
+          >
+            Watch demo
+          </NavLink>
+          <NavLink
+            to="/register"
+            className={({ isActive }) =>
+              isActive
+                ? "text-light-text-100 font-semibold text-lg shadow-navlink-shadow text-center rounded-md px-1"
+                : "text-light-text-100 font-semibold text-center text-lg"
+            }
+          >
+            Register
+          </NavLink>
+          <div className="flex justify-center">
+            {user ? (
+              <Link to={"/"}>
+                <button
+                  onClick={logoutUser}
+                  className=" bg-[#FF792E]   px-8 py-2 rounded-md hover:bg-orange-600 hover:duration-500 font-semibold text-white ml-5"
+                >
+                  Logout
+                </button>
+              </Link>
+            ) : (
+              <button className="bg-button-gradinent px-8 py-2 rounded-md hover:bg-button-gradinent-hover font-semibold text-white font-nunito">
+                <Link to={"/login"}>Login</Link>
+              </button>
+            )}
+          </div>
         </div>
       </ul>
     </div>

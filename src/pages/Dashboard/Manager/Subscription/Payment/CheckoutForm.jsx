@@ -81,7 +81,7 @@ const CheckoutForm = ({ result }) => {
       }
     }
 
-    //     // now save the payment in the database
+    // now save the payment in the database
     const limit = {
       productLimit: productLimit + range,
     };

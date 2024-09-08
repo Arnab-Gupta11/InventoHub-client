@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../../../assets/logo2.png";
+import logo from "../../../assets/logoDark.png";
 const Logo = () => {
   return (
     <div className="flex items-center gap-2">

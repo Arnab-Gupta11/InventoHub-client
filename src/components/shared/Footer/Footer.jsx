@@ -3,7 +3,7 @@ import NavbarTitle from "../Navbar/NavbarTitle";
 const Footer = () => {
   return (
     <div>
-      <footer className="footer footer-center p-10 bg-[#1B2950] text-white">
+      <footer className="footer footer-center p-10 bg-gradinent-bg text-white">
         <aside>
           <div>
             <a className="flex items-center gap-4 mb-6">

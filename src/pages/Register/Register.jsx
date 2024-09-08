@@ -23,10 +23,11 @@ const Register = () => {
   //email password register
   const onSubmit = async (data) => {
     const image = data.image[0];
+    // console.log("🚀 ~ onSubmit ~ image:", image);
     try {
       //1.upload image
       const imageData = await imageUpload(image);
-      // 2.user registration
+      // // 2.user registration
       await registerUser(data.email, data.password);
 
       //3.Update user profile

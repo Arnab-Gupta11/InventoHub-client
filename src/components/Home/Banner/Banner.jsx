@@ -1,15 +1,38 @@
-import banner from "../../../assets/cover.jpg";
+import { Link } from "react-router-dom";
+import banner from "../../../assets/banner.json";
+import Lottie from "lottie-react";
 const Banner = () => {
   return (
-    <div>
-      <div className="w-full">
+    <div className="bg-gradinent-bg">
+      <div className="max-w-screen-xl mx-auto">
+        <div className="flex justify-center items-center min-h-screen ">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 justify-center items-center mx-5 lg:mx-0 lg:mt-5">
+            <div className="lg:w-full h-full flex justify-center bs:ml-5 bs:justify-start items-center order-2 lg:order-1">
+              <div className="">
+                <h2 className="text-2xl text-dark-text-100 md:text-4xl lg:text-6xl font-Cormorant-Garamond font-bold mb-10">
+                  Your Gateway
+                  <br /> to Smart <span className="text-light-text-300">Inventory</span> <br /> <span className="text-light-text-300">Solutions</span>
+                </h2>
+                <p className="hidden lg:block lg:text-lg text-dark-text-200 font-medium ">
+                  Welcome to a world where tracking and managing <br /> your inventory are as simple as a few clicks.
+                </p>
+                <Link></Link>
+              </div>
+            </div>
+            <div className="w-full mx-auto order-1 lg:order-2">
+              <Lottie animationData={banner} loop={true} />
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <div className="w-full">
         <div className="w-full -z-10  relative">
-          <img src={banner} className="w-full h-[400px] lg:h-screen" />
-          <div className="absolute flex items-end lg:items-center h-full left-0  top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
-            <div className="text-white space-y-7 pl-7 md:pl-24 w-2/3 lg:w-full " data-aos="zoom-in">
+          <img src={banner} className="w-full h-[400px] lg:h-screen object-cover brightness-50" />
+          <div className="absolute flex items-end lg:items-center w-full h-full left-0  top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
+            <div className="text-white space-y-7 lg:w-full" data-aos="zoom-in">
               <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold mb-10">
                 Your Gateway
-                <br /> to Smart <span className="text-[#FF792E]">Inventory</span> <br /> <span className="text-[#FF792E]">Solutions</span>
+                <br /> to Smart <span className="text-[#b090ea]">Inventory</span> <br /> <span className="text-[#90DCEA]">Solutions</span>
               </h2>
               <p className="hidden lg:block lg:text-lg">
                 Welcome to a world where tracking and managing your inventory <br /> are as simple as a few clicks
@@ -17,7 +40,7 @@ const Banner = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
