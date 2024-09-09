@@ -6,6 +6,7 @@ import useManager from "../../../hooks/useManager";
 import useAdmin from "../../../hooks/useAdmin";
 
 import Dropdown from "./Dropdown";
+import ToggleTheme from "../ToggleTheme/ToggleTheme";
 const Navbar = () => {
   const [isManager] = useManager();
   const [isAdmin] = useAdmin();
@@ -25,8 +26,8 @@ const Navbar = () => {
     <div
       className={
         navbar
-          ? "w-full fixed bg-[#050d0f] transition-colors  z-50 text-dark-text-100 shadow-md shadow-[#0C1C1F]"
-          : "w-full fixed z-50 text-dark-text-100 transition-colors"
+          ? "w-full fixed bg-light-bg-100 dark:bg-dark-bg-300 transition-colors  z-50  shadow-md shadow-light-bg-400 dark:shadow-dark-bg-100 text-light-text-100 dark:text-dark-text-100 font-medium text-base py-2"
+          : "w-full fixed z-50 transition-colors ease-out text-light-text-100 dark:text-dark-text-100 font-medium text-base py-4"
       }
     >
       <div className="max-w-screen-xl mx-auto flex justify-between items-center py-4 px-5">
@@ -48,60 +49,29 @@ const Navbar = () => {
         <div className="flex-none hidden lg:block">
           <ul className="flex gap-5 items-center justify-end">
             {/* Navbar menu content here */}
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-dark-text-100 font-semibold text-lg shadow-navlink-shadow rounded-md px-2"
-                  : "text-dark-text-100 font-semibold text-lg"
-              }
-            >
+            <NavLink to="/" className={({ isActive }) => (isActive ? " shadow-navlink-shadow rounded-md px-2" : "")}>
               Home
             </NavLink>
             {!isManager && !isAdmin && (
-              <NavLink
-                to="/create-store"
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-light-text-100 font-semibold text-lg shadow-navlink-shadow rounded-md px-2"
-                    : "text-dark-text-100 font-semibold text-lg"
-                }
-              >
+              <NavLink to="/create-store" className={({ isActive }) => (isActive ? " shadow-navlink-shadow rounded-md px-2" : "")}>
                 Create Store
               </NavLink>
             )}
             {(isAdmin || isManager) && (
               <NavLink
                 to={isManager ? "/dashboard/manage-product" : "/dashboard/manage-shop"}
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-light-text-100 font-semibold text-lg shadow-navlink-shadow rounded-md px-2"
-                    : "text-dark-text-100 font-semibold text-lg"
-                }
+                className={({ isActive }) => (isActive ? " shadow-navlink-shadow rounded-md px-2" : "")}
               >
                 Dashboard
               </NavLink>
             )}
-            <NavLink
-              to="/watch-demo"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-light-text-100 font-semibold text-lg shadow-navlink-shadow rounded-md px-2"
-                  : "text-dark-text-100 font-semibold text-lg"
-              }
-            >
+            <NavLink to="/watch-demo" className={({ isActive }) => (isActive ? " shadow-navlink-shadow rounded-md px-2" : "")}>
               Watch demo
             </NavLink>
-            <NavLink
-              to="/register"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-light-text-100 font-semibold text-lg shadow-navlink-shadow rounded-md px-2"
-                  : "text-dark-text-100 font-semibold text-lg"
-              }
-            >
+            <NavLink to="/register" className={({ isActive }) => (isActive ? " shadow-navlink-shadow rounded-md px-2" : "")}>
               Register
             </NavLink>
+            <ToggleTheme />
             {user ? <Dropdown /> : ""}
             <div>
               {user ? (

@@ -8,7 +8,7 @@ import AboutRightSection from "./AboutRightSection";
 import AboutImage from "./AboutImage";
 const About = () => {
   return (
-    <div>
+    <div className="bg-light-bg-100 dark:bg-dark-bg-200">
       <Section>
         <Heading heading={"About Us"} subHeading={"Your Success is Our Priority: Get to "} keyword={"Know Us"} />
         {/* First section */}

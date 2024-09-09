@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     screens: {
@@ -28,6 +29,7 @@ export default {
           100: "#F8F8F8",
           200: "#FFFFFF",
           300: "#171B2A",
+          400: "#d3dce6",
         },
         "dark-bg": {
           100: "#181C51",
@@ -48,12 +50,14 @@ export default {
       backgroundImage: {
         "button-gradinent": "linear-gradient(to right,#FF443A,#FF792E)",
         "button-gradinent-hover": "linear-gradient(to left,#FF5A3C,#FF792E)",
-        "gradinent-bg": "linear-gradient(to bottom right,#0a191c,#040B0C,#5356FB 140%)",
+        "banner-bg-light": "linear-gradient(to bottom right,#E9E9E9,#d3dce6,#5356FB 140%)",
+        "banner-bg-dark": "linear-gradient(to bottom right,#04071B,#0E1332,#6D49B2 140%)",
         "main-bg": "linear-gradient(to right, #FCD0CC,#FFF5F3)",
       },
       boxShadow: {
         "navlink-shadow": " 0px 2px 1px #FF5A3C",
         "feature-card-shadow": "0 0px 3px 1.5px rgba(0, 0, 0, 0.07)",
+        "theme-btn": "inset 0px 0px 5px #d3dce6",
       },
     },
     // colors: {
