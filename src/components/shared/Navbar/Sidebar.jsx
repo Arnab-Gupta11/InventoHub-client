@@ -12,7 +12,7 @@ const Sidebar = () => {
     <div className="w-52 xsm:w-60 h-full">
       <ul className="flex flex-col p-4 w-full min-h-screen bg-[#F8F8F8] opacity-90 pt-10  mb-10 text-lg">
         <div className="mb-8 ml-4">
-          <Logo></Logo>
+          <Logo />
         </div>
         {/* Sidebar content here */}
         <div className="space-y-6 flex flex-col mt-7">
