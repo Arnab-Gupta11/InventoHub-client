@@ -1,28 +1,56 @@
+import { useState } from "react";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import { faqs } from "../../../data/faqs";
 import Section from "../../shared/Section/Section";
-import Question from "./Qustion";
-import faqImg from "../../../assets/faq.jpg";
+import Heading from "../../shared/Heading/Heading";
+import { faqVariants } from "../../../lib/animation";
+
 const Faq = () => {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const toggleFAQ = (index) => {
+    if (openIndex === index) {
+      setOpenIndex(null); // Collapse if already open
+    } else {
+      setOpenIndex(index); // Open the selected one
+    }
+  };
+
   return (
-    <div>
+    <section className="py-10 bg-light-bg-200 dark:bg-dark-bg-200">
       <Section>
-        <div className="grid grid-cols-1 lg:grid-cols-5 max-w-screen-xl items-center mx-auto gap-7 px-5 lg:px-0">
-          <div className="md:col-span-3">
-            <div className="text-center  px-5 lg:px-0 lg:text-start mb-5">
-              <h2 className="text-xl lg:text-2xl font-semibold text-[#FF5A3C]">Frequently Asked Questions</h2>
-              <h1 className="text-3xl lg:text-6xl  font-semibold text-[#221058] mt-3">
-                Explore common queries about <span className="text-[#FF5A3C]"> InventoHub</span>
-              </h1>
-            </div>
-            <div>
-              <Question></Question>
-            </div>
-          </div>
-          <div className="md:col-span-2 order-first md:order-last">
-            <img className="h-full rounded-lg hidden lg:block" src={faqImg} alt="" />
+        <div className="max-w-4xl mx-auto px-4">
+          <Heading heading={"Frequently Asked Questions"} subHeading={"Explore common queries about "} keyword={"InventoHub"} />
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div key={index} className="border-b border-gray-300 dark:border-gray-600">
+                <button onClick={() => toggleFAQ(index)} className="flex justify-between items-center w-full py-4 text-left">
+                  <h3 className="text-base sm:text-lg font-semibold text-light-text-100 dark:text-dark-text-100">{faq.question}</h3>
+                  <span className="text-light-text-200 dark:text-dark-text-200">{openIndex === index ? <FaChevronUp /> : <FaChevronDown />}</span>
+                </button>
+
+                {/* Wrap motion.div with AnimatePresence */}
+                <AnimatePresence initial={false}>
+                  {openIndex === index && (
+                    <motion.div
+                      key={faq.answer}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      variants={faqVariants}
+                      transition={{ duration: 0.4, ease: "easeIn" }}
+                    >
+                      <p className="text-xs sm:text-base text-light-text-200 dark:text-dark-text-200 font-medium pb-4">{faq.answer}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
           </div>
         </div>
       </Section>
-    </div>
+    </section>
   );
 };
 

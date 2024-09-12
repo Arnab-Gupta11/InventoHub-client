@@ -5,6 +5,8 @@ import Contact from "../../components/Home/Contact/Contact";
 import Faq from "../../components/Home/FAQ/FAQ";
 import Review from "../../components/Home/Review/Review";
 import WhyChooseUs from "../../components/Home/WhyChooseUs/WhyChooseUs";
+import MeetMyTeam from "../../components/Home/MeetMyTeam/MeetMyTeam";
+// import MeetMyTeam from "../../components/Home/MeetMyTeam/MeetMyTeam";
 
 const Home = () => {
   return (
@@ -14,11 +16,10 @@ const Home = () => {
       </Helmet>
       <Banner></Banner>
       <WhyChooseUs />
-      {/* <Faq></Faq> */}
       <About></About>
-
-      <Contact></Contact>
-      <Review></Review>
+      <MeetMyTeam />
+      <Faq />
+      <Review/>
     </div>
   );
 };

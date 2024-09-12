@@ -26,7 +26,7 @@ const Navbar = () => {
     <div
       className={
         navbar
-          ? "w-full fixed bg-light-bg-100 dark:bg-dark-bg-300 transition-colors  z-50  shadow-md shadow-light-bg-400 dark:shadow-dark-bg-100 text-light-text-100 dark:text-dark-text-100 font-medium text-base py-2"
+          ? "w-full sticky top-0 bg-light-bg-100 dark:bg-dark-bg-300 transition-colors  z-50  shadow-md shadow-light-bg-400 dark:shadow-dark-bg-100 text-light-text-100 dark:text-dark-text-100 font-medium text-base py-2"
           : "w-full fixed z-50 transition-colors ease-out text-light-text-100 dark:text-dark-text-100 font-medium text-base py-4"
       }
     >

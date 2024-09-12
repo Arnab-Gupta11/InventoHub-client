@@ -53,10 +53,12 @@ export default {
         "banner-bg-light": "linear-gradient(to bottom right,#E9E9E9,#d3dce6,#5356FB 140%)",
         "banner-bg-dark": "linear-gradient(to bottom right,#04071B,#0E1332,#6D49B2 140%)",
         "main-bg": "linear-gradient(to right, #FCD0CC,#FFF5F3)",
+        "team-bg": "radial-gradient(circle at 50% 10%,#ffbd96,#FF792E 100%)",
       },
       boxShadow: {
         "navlink-shadow": " 0px 2px 1px #FF5A3C",
-        "feature-card-shadow": "0 0px 3px 1.5px rgba(0, 0, 0, 0.07)",
+        "feature-card-shadow": "0 0px 5px 1.5px rgba(0, 0, 0, 0.07)",
+        "feature-card-shadow-dark": "0px 0px 5px 1.5px #0E1332",
         "theme-btn": "inset 0px 0px 5px #d3dce6",
       },
     },

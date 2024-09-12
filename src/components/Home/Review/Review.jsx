@@ -1,29 +1,47 @@
-import { useEffect, useState } from "react";
-import ReviewCard from "./ReviewCard";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/free-mode";
+import { Autoplay, FreeMode, Navigation } from "swiper/modules";
+import { testimonials } from "../../../data/testimonials";
+import Heading from "../../shared/Heading/Heading";
+import Section from "../../shared/Section/Section";
 const Review = () => {
-  const [reviews, setReviews] = useState([]);
-  useEffect(() => {
-    fetch("https://inventohub.vercel.app/reviews")
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
-  }, []);
-  console.log(reviews);
-
   return (
-    <div className="bg-[#FAFBFE] mt-16">
-      <div className="max-w-screen-xl mx-auto py-20">
-        <div className=" px-5 text-center ">
-          <div className="">
-            <h4 className="text-[#FF6A25] text-2xl font-semibold mb-3">Testimonial</h4>
-            <h2 className="text-5xl font-bold text-[#1B2850] mb-4">What People say</h2>
-          </div>
+    <div className="bg-light-bg-100 dark:bg-dark-bg-300">
+      <Section>
+        <Heading heading={"Testimonials"} subHeading={"What Our Clients "} keyword={"Say"} />
+
+        <div className="flex items-center justify-center flex-col">
+          <Swiper
+            slidesPerView={1}
+            loop={true}
+            navigation={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            freeMode={true}
+            modules={[Autoplay, FreeMode, Navigation]}
+            className="max-w-[90%] lg:max-w-[60%] mx-auto px-2"
+          >
+            {testimonials.map((testimonial, index) => (
+              <SwiperSlide key={index} className="rounded-lg flex flex-col items-center justify-center text-center z-0">
+                <div className="grid place-items-center">
+                  <img src={testimonial.image} alt={testimonial.name} className="w-24 h-24 rounded-full mb-4 z-10 bg-slate-300 dark:bg-dark-bg-100" />
+                </div>
+                <h3 className="text-light-text-100 dark:text-dark-text-100 text-xl sm:text-2xl font-bold font-Cormorant-Garamond mb-2">
+                  {testimonial.name}
+                </h3>
+                <p className="text-[10px] sm:text-sm mb-2 text-light-text-200 dark:text-slate-500 font-semibold sm:font-medium">
+                  {testimonial.position}
+                </p>
+                <p className="text-xs sm:text-base text-slate-600 dark:text-dark-text-200 font-medium">{testimonial.testimonial}</p>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mr-5 lg:mr-0">
-          {reviews.slice(0, 3)?.map((review) => (
-            <ReviewCard key={review._id} reviewCard={review}></ReviewCard>
-          ))}
-        </div>
-      </div>
+      </Section>
     </div>
   );
 };
