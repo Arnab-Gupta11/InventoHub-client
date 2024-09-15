@@ -9,14 +9,24 @@ import imageUpload from "../../api/utils";
 import { FcGoogle } from "react-icons/fc";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Helmet } from "react-helmet-async";
+import { FiUpload } from "react-icons/fi";
+import Button from "../../components/shared/Button/Button";
+import { useEffect, useState } from "react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 const Register = () => {
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
+  const [showPassword, setShowPassword] = useState(false);
+  useEffect(() => {
+    const currentMode = localStorage.getItem("mode") || "light";
+    document.documentElement.classList.add(currentMode);
+  }, []);
   const { registerUser, updateUserProfile, googleSignIn } = useAuth();
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -73,12 +83,8 @@ const Register = () => {
       toast.error(err.message);
     }
   };
-
-  const shadow = {
-    boxShadow: "0px 0px 25px  #d3dce6",
-  };
   return (
-    <div className="min-h-screen bg-[#FAFBFE] z-0 font-crimson">
+    <div className="min-h-screen bg-light-bg-200 dark:bg-dark-bg-300 z-0 pt-0 md:pt-10 font-Work-Sans">
       <Helmet>
         <title>Inventohub | Register</title>
       </Helmet>
@@ -88,12 +94,12 @@ const Register = () => {
           <div className="hidden md:block md:w-5/12 ">
             <Lottie animationData={loginAnimation} loop={true} />
           </div>
-          <div className="w-11/12 md:10/12 lg:w-4/12  text-[#2d373c] bg-base-100 rounded-lg mx-auto" style={shadow}>
-            <div className="text-center mb-3 mt-3">
-              <div className="ml-32 mt-8">
-                <NavbarTitle></NavbarTitle>
+          <div className="w-11/12 md:10/12 lg:w-4/12 bg-light-bg-100 dark:bg-dark-bg-200 rounded-lg mx-auto shadow-md shadow-light-bg-400 dark:shadow-dark-bg-200">
+            <div className="text-center mb-3 mt-8">
+              <div className="grid place-items-center">
+                <NavbarTitle />
               </div>
-              <h1 className="text-5xl font-bold pt-10 text-[#1B2850]">Register now!</h1>
+              <h1 className="text-xl xsm:text-2xl sm:text-4xl lg:px-5 font-bold pt-10 text-light-text-100 dark:text-dark-text-100">Register now!</h1>
             </div>
             <div className="card-body">
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -102,7 +108,7 @@ const Register = () => {
                     type="text"
                     placeholder="Full name"
                     name="name"
-                    className="px-4 py-3 rounded-lg shadow-inner shadow-violet-300 outline-none border-none mb-4"
+                    className="px-4 py-3 w-full rounded-lg shadow-inner shadow-violet-300 dark:shadow-dark-bg-300 outline-none border-none bg-transparent font-medium text-slate-600 dark:text-dark-text-200"
                     {...register("name", { required: true })}
                   />
                   {errors.name && <span className="text-red-700 text-xs font-medium mt-0 mb-3 ml-1">Name is required</span>}
@@ -112,81 +118,91 @@ const Register = () => {
                     type="email"
                     placeholder="email"
                     name="email"
-                    className="px-4 py-3 rounded-lg shadow-inner shadow-violet-300 outline-none border-none mb-4"
+                    className="px-4 py-3 w-full rounded-lg shadow-inner shadow-violet-300 dark:shadow-dark-bg-300 outline-none border-none bg-transparent font-medium text-slate-600 dark:text-dark-text-200 mt-4"
                     {...register("email", { required: true })}
                   />
                   {errors.email && <span className="text-red-700 text-xs font-medium mt-0 mb-3 ml-1">Email is required</span>}
                 </div>
-                <div className="form-control">
-                  <input
-                    className="px-4 py-3 rounded-lg shadow-inner shadow-violet-300 outline-none border-none "
-                    aria-describedby="file_input_help"
-                    id="file_input"
-                    type="file"
-                    accept="image/*"
-                    {...register("image", { required: true })}
-                  />
-                  <p className=" text-sm text-gray-500 mb-4" id="file_input_help ">
-                    Upload image (PNG, JPG )
-                    {errors.image && <span className="text-red-700 text-xs font-medium mt-0 mb-3 ml-1">Image is required</span>}
-                  </p>
-                </div>
                 <div className="form-control mb-4">
                   <div className="relative">
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       name="password"
-                      placeholder="password"
-                      className="px-4 py-3 w-full rounded-lg shadow-inner shadow-violet-300 outline-none border-none bg-transparent mb-4"
+                      placeholder="Password"
+                      className="px-4 py-3 w-full rounded-lg shadow-inner shadow-violet-300 dark:shadow-dark-bg-300 outline-none border-none bg-transparent mt-4 font-medium text-slate-600 dark:text-dark-text-200"
                       {...register("password", {
                         required: true,
                         pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{6,}$/,
                       })}
                     />
+                    <span
+                      onClick={() => {
+                        setShowPassword(!showPassword);
+                      }}
+                      className="absolute top-8 right-4 cursor-pointer text-slate-500"
+                    >
+                      {showPassword ? <AiOutlineEye size={16} /> : <AiOutlineEyeInvisible size={16} />}
+                    </span>
                     {errors.password?.type === "required" && (
                       <span className="text-red-700 text-xs font-medium mt-0 mb-3 ml-1">Password is required</span>
                     )}
                     {errors.password?.type === "pattern" && (
-                      <span className="text-red-700 text-xs font-medium mt-0 mb-3 ml-1">
+                      <p className="text-green-500 text-xs font-medium mt-1 mb-3 ml-1 text-justify">
                         Password must contain at least 6 characters, at least 1 capital letter, and at least 1 special character.
-                      </span>
+                      </p>
                     )}
                   </div>
                 </div>
-                <p>
-                  <input type="checkbox" name="checkbox" id="checkbox" />
-                  <label htmlFor="checkbox" className="ml-3">
+
+                <div className="form-control">
+                  <div className="flex items-center mt-4 gap-3">
+                    {/* File Upload Button */}
+                    <label
+                      htmlFor="file_input"
+                      className="cursor-pointer flex items-center justify-center px-4 py-2 bg-[#5356FB] text-white font-medium rounded-lg shadow-md hover:bg-[#0B6FFC] transition-all duration-300 flex-1"
+                    >
+                      <FiUpload className="w-5 h-5 mr-2" /> {/* React Icon */}
+                      Upload Image
+                    </label>
+
+                    {/* Hidden File Input */}
+                    <input className="hidden" id="file_input" type="file" accept="image/*" {...register("image", { required: true })} />
+
+                    {/* Display Selected File Name */}
+                    <p className="text-sm text-slate-500 dark:text-dark-slate-700 font-medium flex-1">
+                      {watch("image")?.[0]?.name ? `${watch("image")[0].name}` : "No file selected"}
+                    </p>
+                  </div>
+
+                  <p className=" text-sm text-gray-500" id="file_input_help ">
+                    {errors.image && <span className="text-red-700 text-xs font-medium mt-0 mb-3 ml-1">Image is required</span>}
+                  </p>
+                </div>
+
+                <p className="flex items-center mt-4">
+                  <input type="checkbox" name="checkbox" id="checkbox" className="hover:cursor-pointer" />
+                  <label htmlFor="checkbox" className="ml-3 text-xs xsm:text-sm sm:text-base font-medium text-slate-400 dark:text-slate-700">
                     Accept our term and condition
                   </label>
                 </p>
                 <div className="form-control mt-6 p-0">
-                  <button
-                    className="bg-[#1B2850]  px-8 py-2 rounded-md hover:bg-[#FF792E]  hover:duration-500 font-semibold text-white"
-                    type="submit"
-                  >
+                  <Button variant={"default"} className={"w-full"}>
                     Register
-                  </button>
+                  </Button>
                 </div>
               </form>
-              <hr className="my-5 bg-[#1B2850]" />
-              <div>
-                <div className="flex items-center px-4 py-3 w-full rounded-lg justify-center text-lg gap-2 border border-[#1B2850] shadow-md hover:shadow-md hover:shadow-[#1B2850]">
-                  <div className="">
-                    <FcGoogle></FcGoogle>
-                  </div>
-
-                  <button onClick={handleGoogleLogin} className="text-[#706F6F] font-medium">
-                    Sign in with Google
-                  </button>
-                </div>
-              </div>
-
-              <label className="label text-neutral font-medium">
+              <p className="text-light-text-200 dark:text-dark-text-200 font-medium mt-1">
                 Already have an account?
-                <Link to="/login" className="text-[#FF792E] text-base link link-hover ml-2 font-semibold">
+                <Link to="/login" className="text-[#FF792E] text-base hover:text-[#FF792E] hover:underline font-semibold ml-1">
                   Please Login
                 </Link>
-              </label>
+              </p>
+              <div className="my-5 border-[0.5px] border-light-bg-400 dark:border-slate-800 " />
+              <div className="grid place-items-center">
+                <Button variant={"outline"} size={"auto"} icon={FcGoogle} iconPosition={"left"} onClick={handleGoogleLogin}>
+                  Google
+                </Button>
+              </div>
             </div>
           </div>
         </div>

@@ -48,8 +48,8 @@ export default {
         },
       },
       backgroundImage: {
-        "button-gradinent": "linear-gradient(to right,#FF443A,#FF792E)",
-        "button-gradinent-hover": "linear-gradient(to left,#FF5A3C,#FF792E)",
+        "button-gradient": "linear-gradient(to right,#FF443A,#FF792E)",
+        "button-gradient-hover": "linear-gradient(to left,#FF5A3C,#FF792E)",
         "banner-bg-light": "linear-gradient(to bottom right,#E9E9E9,#d3dce6,#5356FB 140%)",
         "banner-bg-dark": "linear-gradient(to bottom right,#04071B,#0E1332,#6D49B2 140%)",
         "main-bg": "linear-gradient(to right, #FCD0CC,#FFF5F3)",

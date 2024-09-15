@@ -8,7 +8,7 @@ import Heading from "../../shared/Heading/Heading";
 import Section from "../../shared/Section/Section";
 const Review = () => {
   return (
-    <div className="bg-light-bg-100 dark:bg-dark-bg-300">
+    <div className="bg-light-bg-100 dark:bg-dark-bg-300 -z-20">
       <Section>
         <Heading heading={"Testimonials"} subHeading={"What Our Clients "} keyword={"Say"} />
 
@@ -16,17 +16,20 @@ const Review = () => {
           <Swiper
             slidesPerView={1}
             loop={true}
-            navigation={true}
+            navigation={{
+              nextEl: ".button-next-slide",
+              prevEl: ".button-prev-slide",
+            }}
             autoplay={{
               delay: 2500,
               disableOnInteraction: false,
             }}
             freeMode={true}
             modules={[Autoplay, FreeMode, Navigation]}
-            className="max-w-[90%] lg:max-w-[60%] mx-auto px-2"
+            className="max-w-[90%] lg:max-w-[60%] relative mx-auto px-2 -z-20"
           >
             {testimonials.map((testimonial, index) => (
-              <SwiperSlide key={index} className="rounded-lg flex flex-col items-center justify-center text-center z-0">
+              <SwiperSlide key={index} className="rounded-lg flex flex-col items-center justify-center text-center -z-10">
                 <div className="grid place-items-center">
                   <img src={testimonial.image} alt={testimonial.name} className="w-24 h-24 rounded-full mb-4 z-10 bg-slate-300 dark:bg-dark-bg-100" />
                 </div>
@@ -37,6 +40,7 @@ const Review = () => {
                   {testimonial.position}
                 </p>
                 <p className="text-xs sm:text-base text-slate-600 dark:text-dark-text-200 font-medium">{testimonial.testimonial}</p>
+                <div className="button-next-slide absolute bg-[#FFFF] text-[#e7f867] z-20">Next</div>
               </SwiperSlide>
             ))}
           </Swiper>

@@ -3,18 +3,24 @@ import { FcGoogle } from "react-icons/fc";
 
 import Lottie from "lottie-react";
 import toast, { Toaster } from "react-hot-toast";
-
 import loginAnimation from "../../assets/loginAnimation.json";
 import useAuth from "../../hooks/useAuth";
 import NavbarTitle from "../../components/shared/Navbar/NavbarTitle";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Helmet } from "react-helmet-async";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useEffect, useState } from "react";
+import Button from "../../components/shared/Button/Button";
 const Login = () => {
   const axiosPublic = useAxiosPublic();
   const { loginUser, googleSignIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  useEffect(() => {
+    const currentMode = localStorage.getItem("mode") || "light";
+    document.documentElement.classList.add(currentMode);
+  }, []);
   const {
     register,
     handleSubmit,
@@ -64,11 +70,13 @@ const Login = () => {
     }
   };
 
-  const shadow = {
-    boxShadow: "0px 0px 25px  #d3dce6",
-  };
+  // const shadow = {
+  //   boxShadow: "0px 0px 10px 0px  #d3dce6",
+  // };
+
+  const [showPassword, setShowPassword] = useState(false);
   return (
-    <div className="min-h-screen bg-[#FAFBFE] z-0 pt-10 font-crimson">
+    <div className="min-h-screen bg-light-bg-200 dark:bg-dark-bg-300 z-0 pt-0 md:pt-10 font-Work-Sans">
       <Helmet>
         <title>Inventohub | Login</title>
       </Helmet>
@@ -78,15 +86,17 @@ const Login = () => {
           <div className="hidden md:block md:w-5/12 ">
             <Lottie animationData={loginAnimation} loop={true} />
           </div>
-          <div className="w-11/12  md:10/12 lg:w-4/12  text-[#1B2850] bg-base-100 rounded-lg mx-auto" style={shadow}>
-            <div className="text-center mb-3 mt-3">
-              <div className="ml-32 mt-8">
-                <NavbarTitle></NavbarTitle>
+          <div className="w-11/12  md:10/12 lg:w-4/12 bg-light-bg-100 dark:bg-dark-bg-200 rounded-lg mx-auto shadow-md shadow-light-bg-400 dark:shadow-dark-bg-200">
+            <div className="text-center mb-3 mt-8">
+              <div className="grid place-items-center">
+                <NavbarTitle />
               </div>
-              <h1 className="text-xl md:text-4xl lg:px-5 font-bold pt-10 text-[#1B2850]">Login to your account</h1>
-              <div className="mt-2 font-medium text-lg">
-                Dont have an account?
-                <Link to="/register" className="text-[#FF792E] text-base link link-hover ml-2 font-semibold">
+              <h1 className="text-xl xsm:text-2xl sm:text-4xl lg:px-5 font-bold pt-10 text-light-text-100 dark:text-dark-text-100">
+                Login to your account
+              </h1>
+              <div className="mt-2 font-medium text-xs xsm:text-sm md:text-base text-light-text-200 dark:text-dark-text-200">
+                Don&apos;t have an account?
+                <Link to="/register" className="text-[#FF792E] link link-hover ml-2 font-semibold">
                   Please Register
                 </Link>
               </div>
@@ -96,64 +106,57 @@ const Login = () => {
                 <div className="form-control">
                   <input
                     type="email"
-                    placeholder="email"
+                    placeholder="Email"
                     name="email"
-                    className="px-4 py-3 rounded-lg shadow-inner shadow-violet-300 outline-none border-none mb-4"
+                    className="px-4 py-3 w-full rounded-lg shadow-inner shadow-violet-300 dark:shadow-dark-bg-300 outline-none border-none bg-transparent font-medium text-slate-600 dark:text-dark-text-200"
                     {...register("email", { required: true })}
                   />
-                  {errors.email && <span className="text-red-700 text-xs font-medium mt-0 mb-3 ml-1">Email is required</span>}
+                  {errors.email && <span className="text-red-700 text-xs font-medium mt-1 mb-3 ml-1">Email is required</span>}
                 </div>
 
                 <div className="form-control mb-4">
                   <div className="relative">
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       name="password"
-                      placeholder="password"
-                      className="px-4 py-3 w-full rounded-lg shadow-inner shadow-violet-300 outline-none border-none bg-transparent mb-4"
+                      placeholder="Password"
+                      className="px-4 py-3 w-full rounded-lg shadow-inner shadow-violet-300 dark:shadow-dark-bg-300 outline-none border-none bg-transparent mt-4 font-medium text-slate-600 dark:text-dark-text-200"
                       {...register("password", {
                         required: true,
                         pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{6,}$/,
                       })}
                     />
+                    <span
+                      onClick={() => {
+                        setShowPassword(!showPassword);
+                      }}
+                      className="absolute top-8 right-4 cursor-pointer text-slate-500"
+                    >
+                      {showPassword ? <AiOutlineEye size={16} /> : <AiOutlineEyeInvisible size={16} />}
+                    </span>
                     {errors.password?.type === "required" && (
                       <span className="text-red-700 text-xs font-medium mt-0 mb-3 ml-1">Password is required</span>
                     )}
                     {errors.password?.type === "pattern" && (
-                      <span className="text-red-700 text-xs font-medium mt-0 mb-3 ml-1">
+                      <p className="text-green-500 text-xs font-medium mt-1 mb-3 ml-1 text-justify">
                         Password must contain at least 6 characters, at least 1 capital letter, and at least 1 special character.
-                      </span>
+                      </p>
                     )}
                   </div>
                 </div>
 
-                <p>
-                  <input type="checkbox" name="checkbox" id="checkbox" />
-                  <label htmlFor="checkbox" className="ml-3">
-                    Accept our term and condition
-                  </label>
-                </p>
                 <div className="form-control mt-6 p-0">
-                  <button
-                    className="bg-[#1B2850]  px-8 py-2 rounded-md hover:bg-[#FF792E]  hover:duration-500 font-semibold text-white"
-                    type="submit"
-                  >
+                  <Button variant={"default"} className={"w-full"}>
                     Login
-                  </button>
+                  </Button>
                 </div>
               </form>
 
-              <hr className="my-5 bg-[#1B2850]" />
-              <div>
-                <div className="flex items-center px-4 py-3 w-full rounded-lg justify-center text-lg gap-2 border border-[#1B2850] shadow-md hover:shadow-md hover:shadow-[#1B2850]">
-                  <div className="">
-                    <FcGoogle></FcGoogle>
-                  </div>
-
-                  <button onClick={handleGoogleLogin} className="text-[#706F6F] font-medium">
-                    Sign in with Google
-                  </button>
-                </div>
+              <div className="my-5 border-[0.5px] border-light-bg-400 dark:border-slate-800 " />
+              <div className="grid place-items-center">
+                <Button variant={"outline"} size={"auto"} icon={FcGoogle} iconPosition={"left"}>
+                  Google
+                </Button>
               </div>
             </div>
           </div>
