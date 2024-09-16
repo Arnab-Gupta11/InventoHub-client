@@ -9,7 +9,7 @@ import imageUpload from "../../api/utils";
 import { FcGoogle } from "react-icons/fc";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Helmet } from "react-helmet-async";
-import { FiUpload } from "react-icons/fi";
+import { FiAlertCircle, FiCheck, FiUpload } from "react-icons/fi";
 import Button from "../../components/shared/Button/Button";
 import { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -111,7 +111,7 @@ const Register = () => {
                     className="px-4 py-3 w-full rounded-lg shadow-inner shadow-violet-300 dark:shadow-dark-bg-300 outline-none border-none bg-transparent font-medium text-slate-600 dark:text-dark-text-200"
                     {...register("name", { required: true })}
                   />
-                  {errors.name && <span className="text-red-700 text-xs font-medium mt-0 mb-3 ml-1">Name is required</span>}
+                  {errors.name && <span className="text-red-700 text-xs font-medium mt-0 ml-1">Name is required</span>}
                 </div>
                 <div className="form-control">
                   <input
@@ -121,7 +121,7 @@ const Register = () => {
                     className="px-4 py-3 w-full rounded-lg shadow-inner shadow-violet-300 dark:shadow-dark-bg-300 outline-none border-none bg-transparent font-medium text-slate-600 dark:text-dark-text-200 mt-4"
                     {...register("email", { required: true })}
                   />
-                  {errors.email && <span className="text-red-700 text-xs font-medium mt-0 mb-3 ml-1">Email is required</span>}
+                  {errors.email && <span className="text-red-700 text-xs font-medium mt-0 ml-1">Email is required</span>}
                 </div>
                 <div className="form-control mb-4">
                   <div className="relative">
@@ -143,11 +143,9 @@ const Register = () => {
                     >
                       {showPassword ? <AiOutlineEye size={16} /> : <AiOutlineEyeInvisible size={16} />}
                     </span>
-                    {errors.password?.type === "required" && (
-                      <span className="text-red-700 text-xs font-medium mt-0 mb-3 ml-1">Password is required</span>
-                    )}
+                    {errors.password?.type === "required" && <span className="text-red-700 text-xs font-medium mt-0 ml-1">Password is required</span>}
                     {errors.password?.type === "pattern" && (
-                      <p className="text-green-500 text-xs font-medium mt-1 mb-3 ml-1 text-justify">
+                      <p className="text-green-500 text-xs font-medium mt-1 ml-1 text-justify">
                         Password must contain at least 6 characters, at least 1 capital letter, and at least 1 special character.
                       </p>
                     )}
@@ -175,16 +173,39 @@ const Register = () => {
                   </div>
 
                   <p className=" text-sm text-gray-500" id="file_input_help ">
-                    {errors.image && <span className="text-red-700 text-xs font-medium mt-0 mb-3 ml-1">Image is required</span>}
+                    {errors.image && <span className="text-red-700 text-xs font-medium mt-0 ml-1">Image is required</span>}
                   </p>
                 </div>
 
-                <p className="flex items-center mt-4">
-                  <input type="checkbox" name="checkbox" id="checkbox" className="hover:cursor-pointer" />
-                  <label htmlFor="checkbox" className="ml-3 text-xs xsm:text-sm sm:text-base font-medium text-slate-400 dark:text-slate-700">
-                    Accept our term and condition
+                <div className="flex gap-2 items-center relative mt-4">
+                  {/* Checkbox Input */}
+                  <input
+                    type="checkbox"
+                    id="some_id"
+                    name="agree"
+                    className={`peer appearance-none w-4 h-4 border-2 rounded-sm bg-white transition-colors border-blue-500 checked:border-none checked:bg-blue-800
+                      ${errors.agree && "border-red-600"}
+                      `}
+                    {...register("agree", { required: true })}
+                  />
+
+                  {/* Checkbox Label */}
+                  <label htmlFor="some_id" className="text-sm font-medium text-light-text-200 dark:text-dark-text-200">
+                    I agree to the terms and conditions
                   </label>
-                </p>
+
+                  {/* React Icon Checkmark (Visible when checked) */}
+                  <FiCheck className={`absolute top-[5px] left-[3px] w-3 h-3  text-white hidden peer-checked:block pointer-events-none`} />
+                </div>
+
+                {/* Error Message */}
+                {errors.agree && (
+                  <div className="flex items-center mt-1 text-red-700 text-xs font-medium ml-5">
+                    <FiAlertCircle className="mr-1" />
+                    You must agree to continue
+                  </div>
+                )}
+
                 <div className="form-control mt-6 p-0">
                   <Button variant={"default"} className={"w-full"}>
                     Register

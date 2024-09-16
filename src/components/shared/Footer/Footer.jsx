@@ -1,14 +1,17 @@
-import NavbarTitle from "../Navbar/NavbarTitle";
+import { Link } from "react-router-dom";
+import logo1 from "../../../assets/logoDark.png";
 
 const Footer = () => {
   return (
     <div>
-      <footer className="footer footer-center p-10 bg-gradinent-bg text-white">
+      <footer className="footer footer-center p-10 bg-gradient-to-bl from-30% from-[#000000] to-[#02021E] to-130% text-white">
         <aside>
           <div>
-            <a className="flex items-center gap-4 mb-6">
-              <NavbarTitle></NavbarTitle>
-            </a>
+            <div className="flex items-center gap-4 mb-6">
+              <Link to={"/"}>
+                <img src={logo1} alt="" className={`w-24 xsm:w-32 sm:w-40`} />
+              </Link>
+            </div>
           </div>
           <p className="text-lg">Providing reliable services since 2008</p>
           <p>Copyright © 2023 - All right reserved</p>

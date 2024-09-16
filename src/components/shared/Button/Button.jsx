@@ -11,7 +11,7 @@ const Button = ({ children, variant, size, icon: Icon, iconPosition, iconAnimati
   const sizeStyles = {
     auto: "text-[10px] xsm:text-sm sm:text-base 2xl:text-lg px-2 py-1.5 xsm:px-4 xs:py-2 bs:px-6 bs:py-2 rounded-[6px] md:rounded-[8px]",
     sm: "text-[10px] xs:text-sm px-2 py-1.5 rounded-[8px]",
-    md: "text-[10px] xsm:text-sm sm:text-base px-2 py-1.5 xs:px-4 xs:py-2",
+    md: "text-[10px] xsm:text-sm sm:text-base px-2 py-1 xs:px-4 xs:py-2",
     lg: "text-base px-6 py-3 rounded-[8px]",
   };
   const iconPositionStyles = {
