@@ -154,7 +154,7 @@ const Login = () => {
 
               <div className="my-5 border-[0.5px] border-light-bg-400 dark:border-slate-800 " />
               <div className="grid place-items-center">
-                <Button variant={"outline"} size={"auto"} icon={FcGoogle} iconPosition={"left"}>
+                <Button variant={"outline"} size={"auto"} icon={FcGoogle} iconPosition={"left"} onClick={handleGoogleLogin}>
                   Google
                 </Button>
               </div>

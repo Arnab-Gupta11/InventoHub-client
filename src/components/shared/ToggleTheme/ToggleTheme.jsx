@@ -4,7 +4,6 @@ import useToggleTheme from "../../../hooks/useToggleTheme";
 
 const ToggleTheme = () => {
   const { mode, handleTheme } = useToggleTheme();
-  console.log(mode);
   return (
     <button
       onClick={handleTheme}

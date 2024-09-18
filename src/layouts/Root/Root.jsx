@@ -3,7 +3,6 @@ import Navbar from "../../components/shared/Navbar/Navbar";
 import Sidebar from "../../components/shared/Navbar/Sidebar";
 import Footer from "../../components/shared/Footer/Footer";
 import Navbar2 from "../../components/shared/Navbar/Navbar2";
-import MeetMyTeam from "../../components/Home/MeetMyTeam/MeetMyTeam";
 
 const Root = () => {
   const location = useLocation();
@@ -14,12 +13,11 @@ const Root = () => {
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           {/* Navbar */}
-          {location?.pathname === "/" ? <Navbar></Navbar> : <Navbar2></Navbar2>}
+          {location?.pathname === "/" ? <Navbar /> : <Navbar2 />}
           {/*  */}
 
           {/* Page content here */}
           <Outlet></Outlet>
-          {/* <MeetMyTeam /> */}
           <Footer></Footer>
         </div>
         <div className="drawer-side z-50 min-h-screen w-full">

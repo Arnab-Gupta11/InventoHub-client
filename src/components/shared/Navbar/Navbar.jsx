@@ -7,7 +7,9 @@ import useAdmin from "../../../hooks/useAdmin";
 
 import Dropdown from "./Dropdown";
 import ToggleTheme from "../ToggleTheme/ToggleTheme";
+import Button from "../Button/Button";
 const Navbar = () => {
+  const { user } = useAuth();
   const [isManager] = useManager();
   const [isAdmin] = useAdmin();
 
@@ -20,7 +22,6 @@ const Navbar = () => {
     }
   };
   window.addEventListener("scroll", changeBackground);
-  const { user } = useAuth();
 
   return (
     <div
@@ -68,8 +69,8 @@ const Navbar = () => {
             <NavLink to="/watch-demo" className={({ isActive }) => (isActive ? " shadow-navlink-shadow rounded-md px-2" : "")}>
               Watch demo
             </NavLink>
-            <NavLink to="/register" className={({ isActive }) => (isActive ? " shadow-navlink-shadow rounded-md px-2" : "")}>
-              Register
+            <NavLink to="/contact" className={({ isActive }) => (isActive ? " shadow-navlink-shadow rounded-md px-2" : "")}>
+              Contact
             </NavLink>
             <ToggleTheme />
             {user ? <Dropdown /> : ""}
@@ -77,9 +78,11 @@ const Navbar = () => {
               {user ? (
                 ""
               ) : (
-                <button className="bg-button-gradinent px-8 py-2 rounded-md hover:bg-button-gradinent-hover font-semibold text-white font-nunito">
-                  <Link to={"/login"}>Login</Link>
-                </button>
+                <Link to={"/login"}>
+                  <Button variant={"default"} size={"auto"}>
+                    Login
+                  </Button>
+                </Link>
               )}
             </div>
           </ul>

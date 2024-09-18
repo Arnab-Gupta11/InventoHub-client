@@ -19,12 +19,13 @@ import AdminSummary from "../pages/Dashboard/Admin/AdminSummary/AdminSummary";
 import Payment from "../pages/Dashboard/Manager/Subscription/Payment/Payment";
 import PrivateRoute from "./PrivateRoute";
 import Unauthorize from "../pages/Error/Unauthorize";
+import Contact from "../pages/Contact/Contact";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root></Root>,
-    errorElement: <ErrorPage></ErrorPage>,
+    element: <Root />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/watch-demo",
         element: <WatchDemo></WatchDemo>,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
     ],
   },

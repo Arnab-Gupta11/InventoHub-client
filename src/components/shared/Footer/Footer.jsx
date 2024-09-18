@@ -13,8 +13,8 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <p className="text-lg">Providing reliable services since 2008</p>
-          <p>Copyright © 2023 - All right reserved</p>
+          <p className="text-sm xsm:text-base sm:text-lg">Providing reliable services since 2008</p>
+          <p className="text-xs xsm:text-sm sm:text-base">Copyright © 2023 - All right reserved</p>
         </aside>
         <nav>
           <div className="grid grid-flow-col gap-4">
