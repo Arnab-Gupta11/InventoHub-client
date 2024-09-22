@@ -77,7 +77,7 @@ const Sidebar = () => {
             <div className="flex justify-center">
               {user ? (
                 <Link to={"/"}>
-                  <Button variant={"default"} icon={CgLogOut} className={"px-4 py-1"} onClick={logoutUser}>
+                <Button variant={"default"} icon={CgLogOut} className={"px-4 py-1"} onClick={logoutUser}>
                     Logout
                   </Button>
                 </Link>

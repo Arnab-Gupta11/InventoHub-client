@@ -7,7 +7,7 @@ const DashboardMain = () => {
       <Helmet>
         <title>Inventohub | Dashboard</title>
       </Helmet>
-      <div className="bg-[#FAFBFE] min-h-screen">
+      <div className="bg-[#FAFBFE] dark:bg-dark-bg-200 min-h-screen">
         <Outlet></Outlet>
       </div>
     </div>

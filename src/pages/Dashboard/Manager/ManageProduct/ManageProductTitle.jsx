@@ -1,13 +1,11 @@
 /* eslint-disable react/prop-types */
-import Button2 from "../../../../components/shared/Button2/Button2";
 import { IoMdAdd } from "react-icons/io";
 import { Link } from "react-router-dom";
 import useSingleShop from "../../../../hooks/useSingleShop";
 import toast, { Toaster } from "react-hot-toast";
+import Button from "../../../../components/shared/Button/Button";
 const ManageProductTitle = ({ productCount }) => {
-  console.log("🚀 ~ file: ManageProductTitle.jsx:7 ~ ManageProductTitle ~ productCount:", productCount);
   const { shop } = useSingleShop();
-  console.log("🚀 ~ file: ManageProductTitle.jsx:7 ~ ManageProductTitle ~ shop:", shop.productLimit);
   const handleAddProduct = () => {
     if (productCount === shop.productLimit) {
       toast("You reached your product limit! please buy subscription.", {
@@ -18,21 +16,18 @@ const ManageProductTitle = ({ productCount }) => {
 
   return (
     <div>
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col xs:flex-row justify-between items-center gap-3">
         <Toaster></Toaster>
         <div>
-          <h2 className="text-xl md:text-3xl text-[#1B2850] font-semibold">Total {productCount} Product Added</h2>
+          <h2 className="text-base xsm:text-lg xs:text-xl md:text-3xl text-light-text-100 dark:text-dark-text-100 font-semibold">
+            Total Products in Inventory: {productCount}
+          </h2>
         </div>
         <div>
           <Link to={productCount === shop.productLimit ? "/dashboard/subscription" : "/dashboard/manage-product/addProduct"}>
-            <Button2>
-              <div className="flex gap-3 items-center" onClick={handleAddProduct}>
-                <span className="font-semibold">
-                  <IoMdAdd />
-                </span>
-                Add Product
-              </div>
-            </Button2>
+            <Button variant={"default"} size={"md"} onClick={handleAddProduct} icon={IoMdAdd} iconAnimation={"hover:scale-110"}>
+              Add Product
+            </Button>
           </Link>
         </div>
       </div>

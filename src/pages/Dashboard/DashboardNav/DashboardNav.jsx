@@ -4,49 +4,28 @@ import { PiVideoFill } from "react-icons/pi";
 
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
-const DashboardNav = () => {
-  const { user, logoutUser } = useAuth();
+import ToggleTheme from "../../../components/shared/ToggleTheme/ToggleTheme";
+import Dropdown from "../../../components/shared/Navbar/Dropdown";
+import { FiMenu } from "react-icons/fi";
+const DashboardNav = ({ isOpen, setIsOpen }) => {
+  const { user } = useAuth();
   return (
-    <div className="bg-white shadow-2xl shadow-black w-full flex justify-evenly md:justify-end items-center  md:gap-6 py-4 md:pr-10">
+    <div className="bg-light-bg-200 dark:bg-dark-bg-300 w-full flex justify-evenly md:justify-end items-center  md:gap-6 py-4 md:px-6 px-2 shadow-light-container-shadow dark:shadow-dark-container-shadow">
       <Link to={"/"}>
-        <span className="text-2xl text-[#1B2850]">
+        <span className="text-xl text-light-text-100 dark:text-dark-text-100">
           <IoHome />
         </span>
       </Link>
       <Link to={"/watch-demo"}>
-        <span className="text-2xl text-[#1B2850] mt-1">
+        <span className="text-2xl text-light-text-100 dark:text-dark-text-100">
           <PiVideoFill />
         </span>
       </Link>
-      {user ? (
-        <div className="dropdown dropdown-end  ">
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full border-2 border-[#FBB04B]">
-              <img src={user?.photoURL} />
-            </div>
-          </label>
-          <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-            <li>
-              <a className="text-base  font-medium mb-0 text-[#1B2850]">{user?.displayName}</a>
-            </li>
-            <li>
-              <a className="text-base  font-medium text-[#1B2850] mt-0">{user?.email}</a>
-            </li>
-            <li>
-              <Link to={"/"}>
-                <button onClick={logoutUser} className="text-[#FF6A25] text-lg font-medium">
-                  Logout
-                </button>
-              </Link>
-            </li>
-          </ul>
-        </div>
-      ) : (
-        ""
-      )}
-      <label htmlFor="my-drawer-2" className="drawer-button lg:hidden text-2xl text-[#1B2850]">
-        <GiHamburgerMenu />
-      </label>
+      <ToggleTheme />
+      {user ? <Dropdown /> : ""}
+      <button className="lg:hidden text-2xl text-light-text-100 dark:text-dark-text-100" onClick={() => setIsOpen(!isOpen)}>
+        <FiMenu size={24} />
+      </button>
     </div>
   );
 };

@@ -4,35 +4,39 @@ import useAuth from "../../../../../hooks/useAuth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import imageUpload from "../../../../../api/utils";
-import Button2 from "../../../../../components/shared/Button2/Button2";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
+import { FiUpload } from "react-icons/fi";
+import Button from "../../../../../components/shared/Button/Button";
+import { useForm } from "react-hook-form";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const AddProduct = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const handleAddProduct = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    const form = e.target;
-    const product_name = form.name.value;
-    const product_location = form.location.value;
-    const product_quantity = parseInt(form.quantity.value);
-    const production_cost = parseInt(form.cost.value);
-    const profit_margin = parseInt(form.profit.value);
-    const discount = parseInt(form.discount.value);
-    const product_description = form.desc.value;
 
-    //save image
-    const image = form.image.files[0];
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = async (data) => {
+    setLoading(true);
+    const product_name = data.name;
+    const product_location = data.location;
+    const product_quantity = parseInt(data.quantity);
+    const production_cost = parseInt(data.cost);
+    const profit_margin = parseInt(data.profit);
+    const discount = parseInt(data.discount) || 0;
+    const product_description = data.desc;
+    const image = data.image[0];
     const imageData = await imageUpload(image);
     const product_image = imageData?.data?.display_url;
-
     const currentDate = new Date();
     const currentDay = currentDate.toISOString().split("T")[0];
-
-    // // Send data to the server
     try {
       const response = await axiosSecure.get(`/users/manager/${user?.email}`);
 
@@ -55,6 +59,7 @@ const AddProduct = () => {
 
       const res = await axiosSecure.post("/products", newProduct);
       setLoading(false);
+      reset();
 
       if (res.data.insertedId) {
         Swal.fire({
@@ -64,104 +69,145 @@ const AddProduct = () => {
           confirmButtonText: "Cool",
         });
       }
-      navigate("/dashboard/manage-product");
+      // navigate("/dashboard/manage-product");
     } catch (err) {
       console.log("🚀 ~ file: CreateStore.jsx:27 ~ handleAddProduct ~ err:", err);
     }
   };
   return (
-    <div className="min-h-screen bg-[#FAFBFE] z-0">
-      <div className="px-2 md:px-8 mx-auto py-5 ">
-        <h2 className="text-3xl font-bold border-l-8 border-[#FF792E] text-[#1B2850] pl-4 mb-6 ml-5 ">Add new product</h2>
-        <form className="px-5 border bg-white p-7 mb-10 rounded-md mx-3 lg:mx-0" onSubmit={handleAddProduct}>
+    <div className="">
+      <div className="md:px-5 mx-auto py-5 ">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-xl xsm:text-2xl md:text-3xl text-light-text-100 dark:text-dark-text-100 font-semibold border-l-8 border-[#FF792E] pl-2 sm:pl-4 flex-1">
+            Add new product
+          </h2>
+          <button
+            className="w-8 h-8 xs:w-10 xs:h-10 bg-button-gradient hover:bg-button-gradient-hover rounded-full grid place-items-center text-white"
+            onClick={() => navigate(-1)}
+          >
+            <IoMdArrowRoundBack />
+          </button>
+        </div>
+        <form
+          className="bg-light-bg-200 dark:bg-dark-bg-300 shadow-light-container-shadow dark:shadow-dark-container-shadow px-4 py-8 md:px-10 md:py-12 mb-10 rounded-md"
+          onSubmit={handleSubmit(onSubmit)}
+          autoComplete="off"
+        >
           {/* form row */}
-          <div className="flex gap-5 mb-5">
-            <div className="w-1/2">
-              <label className="text-[#1B2850]" htmlFor="">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-5 mb-3 md:mb-5">
+            <div className="w-full md:w-1/2">
+              <label className="text-light-text-100 dark:text-dark-text-100 font-medium" htmlFor="">
                 Product Name
               </label>
               <input
-                required
                 type="text"
                 name="name"
                 placeholder="Enter Product Name"
                 id=""
-                className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block w-full py-3 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
+                className="border border-[#c2c5c7] dark:border-slate-800 focus-within:outline-none block focus-within:bg-light-bg-100  w-full py-3 px-3 mt-2 rounded-md bg-transparent font-medium text-slate-600"
+                {...register("name", { required: true })}
               />
+              {errors.name && <span className="text-red-600 text-xs font-medium mt-0 ml-1">Product name is required</span>}
             </div>
-            <div className="w-1/2">
-              <label className="text-[#1B2850]" htmlFor="">
+            <div className="w-full md:w-1/2">
+              <label className="text-light-text-100 dark:text-dark-text-100 font-medium" htmlFor="">
                 Product Location
               </label>
               <input
-                required
                 type="text"
                 name="location"
                 placeholder="Enter Product Location"
                 id=""
-                className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block w-full py-3 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
+                className="border border-[#c2c5c7] dark:border-slate-800 focus-within:outline-none block focus-within:bg-light-bg-100  w-full py-3 px-3 mt-2 rounded-md bg-transparent font-medium text-slate-600"
+                {...register("location", { required: true })}
               />
+              {errors.location && <span className="text-red-600 text-xs font-medium mt-0 ml-1">Product Location is required</span>}
             </div>
           </div>
           {/* form row */}
-          <div className="flex gap-5 mb-5">
-            <div className="w-1/2">
-              <label className="text-[#1B2850]" htmlFor="">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-5 mb-3 md:mb-5">
+            <div className="w-full md:w-1/2">
+              <label className="text-light-text-100 dark:text-dark-text-100 font-medium" htmlFor="">
                 Product Quantity
               </label>
               <input
-                required
                 type="text"
                 name="quantity"
                 placeholder="Enter Product Quantity"
                 id=""
-                className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block w-full py-3 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
+                className="border border-[#c2c5c7] dark:border-slate-800 focus-within:outline-none block focus-within:bg-light-bg-100  w-full py-3 px-3 mt-2 rounded-md bg-transparent font-medium text-slate-600"
+                {...register("quantity", { required: true })}
               />
+              {errors.quantity && <span className="text-red-600 text-xs font-medium mt-0 ml-1">Product Quantity is required</span>}
             </div>
-            <div className="w-1/2">
-              <label className="text-[#1B2850]" htmlFor="">
+            <div className="w-full md:w-1/2">
+              <label className="text-light-text-100 dark:text-dark-text-100 font-medium" htmlFor="">
                 Production Cost
               </label>
               <input
-                required
                 type="text"
                 name="cost"
                 placeholder="Enter Production Cost"
-                id=""
-                className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block w-full py-3 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
+                className="border border-[#c2c5c7] dark:border-slate-800 focus-within:outline-none block focus-within:bg-light-bg-100  w-full py-3 px-3 mt-2 rounded-md bg-transparent font-medium text-slate-600"
+                {...register("cost", { required: true })}
               />
+              {errors.cost && <span className="text-red-600 text-xs font-medium mt-0 ml-1">Product Cost is required</span>}
             </div>
           </div>
           {/* form row */}
-          <div className="flex gap-5 mb-5">
-            <div className="w-1/2">
-              <label className="text-[#1B2850]" htmlFor="">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-5 mb-3 md:mb-5">
+            <div className="w-full md:w-1/2">
+              <label className="text-light-text-100 dark:text-dark-text-100 font-medium" htmlFor="">
                 Profit Margin ( )%
               </label>
               <input
                 placeholder="Enter Profit Margin"
                 type="text"
                 name="profit"
-                className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block w-full py-3 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
+                className="border border-[#c2c5c7] dark:border-slate-800 focus-within:outline-none block focus-within:bg-light-bg-100  w-full py-3 px-3 mt-2 rounded-md bg-transparent font-medium text-slate-600"
+                {...register("profit", { required: true })}
               />
+              {errors.profit && <span className="text-red-600 text-xs font-medium mt-0 ml-1">Profit Margin is required</span>}
             </div>
-            <div className="w-1/2">
-              <label className="text-[#1B2850]" htmlFor="">
+            <div className="w-full md:w-1/2">
+              <label className="text-light-text-100 dark:text-dark-text-100 font-medium" htmlFor="">
                 Discount ( )%
               </label>
               <input
                 placeholder="Enter Discount"
                 type="text"
                 name="discount"
-                className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block w-full py-3 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
+                className="border border-[#c2c5c7] dark:border-slate-800 focus-within:outline-none block focus-within:bg-light-bg-100  w-full py-3 px-3 mt-2 rounded-md bg-transparent font-medium text-slate-600"
               />
             </div>
           </div>
 
           {/* form row */}
 
-          <div className="">
-            <label className="text-[#1B2850]" htmlFor="">
+          <div>
+            <div className="flex flex-col xs:flex-row items-center mt-4 gap-3">
+              {/* File Upload Button */}
+              <label
+                htmlFor="file_input"
+                className="cursor-pointer flex items-center justify-center px-4 py-2 bg-[#5356FB] text-white font-medium rounded-lg text-base shadow-md hover:bg-[#0B6FFC] transition-all duration-300 flex-1 w-full md:w-1/2"
+              >
+                <FiUpload className="w-3 h-3 xs:w-5 xs:h-5 mr-2" />
+                Upload Product Image
+              </label>
+
+              {/* Hidden File Input */}
+              <input className="hidden" id="file_input" name="image" type="file" accept="image/*" {...register("image", { required: true })} />
+
+              {/* Display Selected File Name */}
+              <p className="text-sm text-slate-500 dark:text-dark-slate-700 font-medium flex-1">
+                {watch("image")?.[0]?.name ? `${watch("image")[0].name}` : "No file selected"}
+              </p>
+            </div>
+            {errors.image && <span className="text-red-600 text-xs font-medium mt-0 ml-1">Product Image is required</span>}
+          </div>
+
+          {/* <div className="">
+            <label className="text-light-text-100 dark:text-dark-text-100 font-medium" htmlFor="">
               Product Image
             </label>
             <input
@@ -172,27 +218,29 @@ const AddProduct = () => {
               type="file"
               accept="image/*"
             />
-          </div>
+          </div> */}
 
           {/* form row */}
 
           <div className=" mt-5">
-            <label className="text-[#1B2850]" htmlFor="">
+            <label className="text-light-text-100 dark:text-dark-text-100 font-medium" htmlFor="">
               Product Description
             </label>
             <textarea
-              className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block w-full py-3 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
+              className="border border-[#c2c5c7] dark:border-slate-800 focus-within:outline-none block focus-within:bg-light-bg-100  w-full py-3 px-3 mt-2 rounded-md bg-transparent font-medium text-slate-600"
               name="desc"
               id=""
               cols="30"
               rows="5"
               placeholder="Enter  Product Description ..."
-            ></textarea>
+              {...register("desc", { required: true })}
+            />
+            {errors.desc && <span className="text-red-600 text-xs font-medium mt-0 ml-1">Product Description is required</span>}
           </div>
 
           {/* button */}
           <div className=" mt-8 ">
-            <Button2 className="w-full hover:border-2 text-white hover:border-[#FF792E] hover:bg-white hover:text-[#FF792E] font-semibold bg-[#FF792E] py-3 text-xl hover:transition hover:duration-500 mt-8 rounded-md cursor-pointer">
+            <Button variant={"default"}>
               {loading ? (
                 <span className="animate-spin flex justify-center">
                   <ImSpinner9 />
@@ -200,7 +248,7 @@ const AddProduct = () => {
               ) : (
                 "Add Product"
               )}
-            </Button2>
+            </Button>
           </div>
         </form>
       </div>

@@ -12,7 +12,7 @@ const Dropdown = () => {
   return (
     <div className="dropdown dropdown-end  z-50 ">
       <motion.label tabIndex={0} className="btn btn-ghost btn-circle avatar" whileHover="hover" variants={avatarVariants}>
-        <div className="w-14 rounded-full border-2 border-light-text-300">
+        <div className="w-10 md:w-14 rounded-full border-2 border-light-text-300">
           <img src={user?.photoURL} />
         </div>
       </motion.label>

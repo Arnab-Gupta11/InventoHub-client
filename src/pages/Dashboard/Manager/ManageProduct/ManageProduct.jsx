@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import DashContainer from "../../../../components/shared/DashContainer/DashContainer";
 import useProducts from "../../../../hooks/useProducts";
 import Products from "./AddProduct/Products";
 import ManageProductTitle from "./ManageProductTitle";
@@ -19,30 +18,29 @@ const ManageProduct = () => {
         <title> Inventohub | Manage Product </title>
       </Helmet>
       {result.length > 0 ? (
-        <div className="py-5 px-8">
+        <div>
           <ManageProductTitle productCount={result.length}></ManageProductTitle>
-          <DashContainer>
-            <div>
-              <div className="overflow-x-auto">
-                <table className="table">
-                  {/* head */}
-                  <thead>
-                    <tr className="text-base text-[#1B2850] font-normal bg-[#FAFBFE] border-none rounded-md">
-                      <th>Product Name</th>
-                      <th>Quantity</th>
-                      <th> Sale Count</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {result?.map((product) => (
-                      <Products key={product._id} product={product} refetch={refetch}></Products>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </DashContainer>
+          <div className="overflow-auto rounded-md block mt-5 shadow-light-container-shadow dark:shadow-dark-container-shadow">
+            <table className="w-full">
+              <thead className="bg-gray-50 dark:bg-dark-bg-300 border-b-2 border-gray-200 dark:border-slate-800 text-lg">
+                <tr className="text-light-text-100 dark:text-dark-text-100">
+                  <th className=" py-4 px-3 text-sm font-semibold tracking-wide text-left">Product Name</th>
+
+                  <th className="w-28 py-4 px-3 text-sm font-semibold tracking-wide text-center">Quantity</th>
+
+                  <th className="w-28 py-4 px-3 text-sm font-semibold tracking-wide text-center whitespace-nowrap">Sale Count</th>
+
+                  <th className="w-28 py-4 px-3 text-sm font-semibold tracking-wide text-center">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody className="divide-y divide-gray-100 dark:divide-slate-800">
+                {result?.map((product) => (
+                  <Products key={product._id} product={product} refetch={refetch} />
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       ) : (
         <div className="flex justify-center items-center min-h-[calc(100vh-80px)]">

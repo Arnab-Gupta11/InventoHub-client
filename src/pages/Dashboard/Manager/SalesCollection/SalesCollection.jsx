@@ -41,31 +41,46 @@ const SalesCollection = () => {
         <title> Inventohub | Sales Collection </title>
       </Helmet>
       {myData.length > 0 ? (
-        <div className="py-5 px-8">
-          <h2 className="text-xl md:text-3xl text-[#1B2850] font-semibold ml-1">All Product</h2>
-          <DashContainer>
-            <div className="mb-7">
+        <div className="pb-5">
+          <div className="flex justify-between items-center flex-col sm:flex-row mb-4 gap-3">
+            <h2 className="text-lg xsm:text-xl xs:text-2xl md:text-3xl text-light-text-100 dark:text-dark-text-100 font-semibold">All Product </h2>
+            <div>
               <form onSubmit={handleSubmit}>
                 <div className="flex  items-center">
                   <input
                     type="text"
                     name="search"
                     placeholder="Search by Id"
-                    className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block py-2 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
+                    className="border border-[#c2c5c7] dark:border-slate-800 focus-within:outline-none block focus-within:bg-light-bg-100  w-full py-2 px-3 mt-2 rounded-md bg-transparent font-medium text-slate-600"
                   />
-                  <div className="mt-2 px-2 p">
-                    <button className="px-3 py-3 bg-[#FF792E]  rounded-md hover:bg-[#1B2850]  hover:duration-500 font-semibold text-white">
+                  <div className="mt-2 px-2">
+                    <button className="px-3 py-3 bg-button-gradient hover:bg-button-gradient-hover  rounded-md hover:bg-[#1B2850]  hover:duration-500 font-semibold text-white">
                       <IoSearchSharp />
                     </button>
                   </div>
                 </div>
               </form>
             </div>
-            <div>
-              <div className="overflow-x-auto">
-                <table className="table">
-                  {/* head */}
-                  <thead>
+          </div>
+
+          <div>
+            <div className="overflow-auto rounded-md block mt-5 shadow-light-container-shadow dark:shadow-dark-container-shadow">
+              <table className="w-full">
+                {/* head */}
+                <thead className="bg-gray-50 dark:bg-dark-bg-300 border-b-2 border-gray-200 dark:border-slate-800 text-lg">
+                  <tr className="text-light-text-100 dark:text-dark-text-100">
+                    <th className="w-40 py-4 px-3 text-sm font-semibold tracking-wide text-left">Product Id</th>
+                    <th className=" py-4 px-3 text-sm font-semibold tracking-wide text-left">Product Name</th>
+
+                    <th className="w-28 py-4 px-3 text-sm font-semibold tracking-wide text-center">Quantity</th>
+                    <th className="w-28 py-4 px-3 text-sm font-semibold tracking-wide text-center">Discount</th>
+
+                    <th className="w-28 py-4 px-3 text-sm font-semibold tracking-wide text-center whitespace-nowrap">SellingPrice</th>
+
+                    <th className="w-28 py-4 px-3 text-sm font-semibold tracking-wide text-center">Action</th>
+                  </tr>
+                </thead>
+                {/* <thead>
                     <tr className="text-base text-[#1B2850] font-normal bg-[#FAFBFE] border-none rounded-md">
                       <th>Product Id</th>
                       <th>Product Name</th>
@@ -74,16 +89,15 @@ const SalesCollection = () => {
                       <th> SellingPrice</th>
                       <th>Action</th>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {myData?.map((product) => (
-                      <SalesCollectionCart key={product._id} product={product} refetch={refetch}></SalesCollectionCart>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  </thead> */}
+                <tbody>
+                  {myData?.map((product) => (
+                    <SalesCollectionCart key={product._id} product={product} refetch={refetch}></SalesCollectionCart>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          </DashContainer>
+          </div>
         </div>
       ) : (
         <div className="flex justify-center items-center min-h-[calc(100vh-80px)]">
