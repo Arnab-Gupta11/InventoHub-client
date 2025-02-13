@@ -8,6 +8,8 @@ import useAuth from "../../../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../../../hooks/useAxiosSecure";
 import imageUpload from "../../../../../../api/utils";
 import Button2 from "../../../../../../components/shared/Button2/Button2";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import Button from "../../../../../../components/shared/Button/Button";
 
 const UpdateProduct = () => {
   const navigate = useNavigate();
@@ -86,10 +88,23 @@ const UpdateProduct = () => {
     }
   };
   return (
-    <div className="min-h-screen bg-[#FAFBFE] z-0">
+    <div className="min-h-screen">
       <div className="px-2 md:px-8 mx-auto py-5 ">
-        <h2 className="text-3xl font-bold border-l-8 border-[#FF792E] text-[#1B2850] pl-4 mb-6 ml-5 ">Update Product</h2>
-        <form className="px-5 border bg-white p-7 mb-10 rounded-md mx-3 lg:mx-0" onSubmit={handleUpdateProduct}>
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-xl xsm:text-2xl md:text-3xl text-light-text-100 dark:text-dark-text-100 font-semibold border-l-8 border-[#FF792E] pl-2 sm:pl-4 flex-1">
+            Update product
+          </h2>
+          <button
+            className="w-8 h-8 xs:w-10 xs:h-10 bg-button-gradient hover:bg-button-gradient-hover rounded-full grid place-items-center text-white"
+            onClick={() => navigate(-1)}
+          >
+            <IoMdArrowRoundBack />
+          </button>
+        </div>
+        <form
+          className="bg-light-bg-200 dark:bg-dark-bg-300 shadow-light-container-shadow dark:shadow-dark-container-shadow px-4 py-8 md:px-10 md:py-12 mb-10 rounded-md"
+          onSubmit={handleUpdateProduct}
+        >
           {/* form row */}
           <div className="flex gap-5 mb-5">
             <div className="w-1/2">
@@ -103,7 +118,7 @@ const UpdateProduct = () => {
                 defaultValue={product_name}
                 placeholder="Enter Product Name"
                 id=""
-                className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block w-full py-3 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
+                className="border border-[#c2c5c7] dark:border-slate-800 focus-within:outline-none block focus-within:bg-light-bg-100  w-full py-3 px-3 mt-2 rounded-md bg-transparent font-medium text-slate-600"
               />
             </div>
             <div className="w-1/2">
@@ -117,7 +132,7 @@ const UpdateProduct = () => {
                 name="location"
                 placeholder="Enter Product Location"
                 id=""
-                className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block w-full py-3 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
+                className="border border-[#c2c5c7] dark:border-slate-800 focus-within:outline-none block focus-within:bg-light-bg-100  w-full py-3 px-3 mt-2 rounded-md bg-transparent font-medium text-slate-600"
               />
             </div>
           </div>
@@ -134,7 +149,7 @@ const UpdateProduct = () => {
                 name="quantity"
                 placeholder="Enter Product Quantity"
                 id=""
-                className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block w-full py-3 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
+                className="border border-[#c2c5c7] dark:border-slate-800 focus-within:outline-none block focus-within:bg-light-bg-100  w-full py-3 px-3 mt-2 rounded-md bg-transparent font-medium text-slate-600"
               />
             </div>
             <div className="w-1/2">
@@ -148,7 +163,7 @@ const UpdateProduct = () => {
                 name="cost"
                 placeholder="Enter Buying Price"
                 id=""
-                className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block w-full py-3 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
+                className="border border-[#c2c5c7] dark:border-slate-800 focus-within:outline-none block focus-within:bg-light-bg-100  w-full py-3 px-3 mt-2 rounded-md bg-transparent font-medium text-slate-600"
               />
             </div>
           </div>
@@ -163,7 +178,7 @@ const UpdateProduct = () => {
                 placeholder="Enter Profit Margin"
                 type="text"
                 name="profit"
-                className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block w-full py-3 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
+                className="border border-[#c2c5c7] dark:border-slate-800 focus-within:outline-none block focus-within:bg-light-bg-100  w-full py-3 px-3 mt-2 rounded-md bg-transparent font-medium text-slate-600"
               />
             </div>
             <div className="w-1/2">
@@ -175,7 +190,7 @@ const UpdateProduct = () => {
                 placeholder="Enter Discount"
                 type="text"
                 name="discount"
-                className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block w-full py-3 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
+                className="border border-[#c2c5c7] dark:border-slate-800 focus-within:outline-none block focus-within:bg-light-bg-100  w-full py-3 px-3 mt-2 rounded-md bg-transparent font-medium text-slate-600"
               />
             </div>
           </div>
@@ -204,18 +219,18 @@ const UpdateProduct = () => {
             </label>
             <textarea
               defaultValue={product_description}
-              className="border border-[#c2c5c7] focus-within:outline-[#FF792E] block w-full py-3 px-3 mt-2 rounded-md text-[#828F9A] font-medium"
+              className="border border-[#c2c5c7] dark:border-slate-800 focus-within:outline-none block focus-within:bg-light-bg-100  w-full py-3 px-3 mt-2 rounded-md bg-transparent font-medium text-slate-600"
               name="desc"
               id=""
               cols="30"
               rows="5"
               placeholder="Enter  Product Description ..."
-            ></textarea>
+            />
           </div>
 
           {/* button */}
           <div className=" mt-8 ">
-            <Button2 className="w-full hover:border-2 text-white hover:border-[#FF792E] hover:bg-white hover:text-[#FF792E] font-semibold bg-[#FF792E] py-3 text-xl hover:transition hover:duration-500 mt-8 rounded-md cursor-pointer">
+            <Button variant={"default"}>
               {loading ? (
                 <span className="animate-spin flex justify-center">
                   <ImSpinner9 />
@@ -223,7 +238,7 @@ const UpdateProduct = () => {
               ) : (
                 "Update Product"
               )}
-            </Button2>
+            </Button>
           </div>
         </form>
       </div>

@@ -3,3 +3,10 @@ export const faqVariants = {
   visible: { opacity: 1, height: "auto" },
   exit: { opacity: 0, height: 0 },
 };
+export const fadeInOut={
+  
+  hidden:{
+    opacity:0,
+    
+  }
+}

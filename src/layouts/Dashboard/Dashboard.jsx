@@ -15,7 +15,7 @@ const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
-      <div className="lg:flex min-h-screen bg-gray-100 font-Work-Sans">
+      <div className=" lg:flex min-h-screen bg-gray-100 font-Work-Sans">
         {/* Sidebar */}
         <DashboardSidebar isOpen={isOpen} />
 

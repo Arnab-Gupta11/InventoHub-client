@@ -22,9 +22,8 @@ const SalesCollectionCart = ({ product }) => {
       saleCount,
       email: user?.email,
     };
-    const result = axiosSecure.post("/carts", soldProduct); //here newbook is the data you want post
+    const result = axiosSecure.post("/carts", soldProduct);
 
-    //this is optional.Use for sweetalert
     if (result.data.insertedId) {
       Swal.fire({
         title: "Success!",

@@ -7,7 +7,7 @@ const SalesSummary = () => {
       <Helmet>
         <title>Inventohub | Sales Summary</title>
       </Helmet>
-      <Sales></Sales>
+      <Sales />
     </div>
   );
 };

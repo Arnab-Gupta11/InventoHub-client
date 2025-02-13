@@ -6,6 +6,7 @@ import Button2 from "../../../../components/shared/Button2/Button2";
 import { IoMdAdd } from "react-icons/io";
 import Loader from "../../../../components/shared/Loader/Loader";
 import { Helmet } from "react-helmet-async";
+import Button from "../../../../components/shared/Button/Button";
 const ManageProduct = () => {
   const [result, refetch, isLoading] = useProducts();
 
@@ -46,16 +47,16 @@ const ManageProduct = () => {
         <div className="flex justify-center items-center min-h-[calc(100vh-80px)]">
           <div className="text-center">
             <Link to={"/dashboard/manage-product/addProduct"}>
-              <Button2>
+              <Button>
                 <div className="flex gap-3 items-center">
                   <span className="font-semibold">
                     <IoMdAdd />
                   </span>
                   Add Product
                 </div>
-              </Button2>
+              </Button>
             </Link>
-            <h1 className="text-3xl text-[#1B2850] font-extrabold mt-4">No Product Available</h1>
+            <h1 className="text-lg xs:text-3xl text-light-text-100 dark:text-dark-text-100 font-extrabold mt-4">No Product Available</h1>
           </div>
         </div>
       )}

@@ -8,7 +8,7 @@ const Banner = () => {
         <div className="flex justify-center items-center min-h-screen ">
           <div className="grid grid-cols-1 bs:grid-cols-2 gap-3 bs:gap-7 justify-center items-center mx-5 bs:px-20 lg:mx-0 bs:mt-20">
             <div className="lg:w-full h-full flex justify-center bs:ml-5 bs:justify-start items-center order-2 bs:order-1">
-              <div className="">
+              <div>
                 <h2 className="text-2xl text-light-text-100 dark:text-dark-text-100 md:text-4xl lg:text-6xl font-Cormorant-Garamond font-bold mb-5 md:mb-10 text-center bs:text-left">
                   Your Gateway
                   <br className="hidden bs:block" /> to Smart <span className="text-light-text-300">Inventory</span>{" "}
@@ -26,22 +26,6 @@ const Banner = () => {
           </div>
         </div>
       </div>
-      {/* <div className="w-full">
-        <div className="w-full -z-10  relative">
-          <img src={banner} className="w-full h-[400px] lg:h-screen object-cover brightness-50" />
-          <div className="absolute flex items-end lg:items-center w-full h-full left-0  top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
-            <div className="text-white space-y-7 lg:w-full" data-aos="zoom-in">
-              <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold mb-10">
-                Your Gateway
-                <br /> to Smart <span className="text-[#b090ea]">Inventory</span> <br /> <span className="text-[#90DCEA]">Solutions</span>
-              </h2>
-              <p className="hidden lg:block lg:text-lg">
-                Welcome to a world where tracking and managing your inventory <br /> are as simple as a few clicks
-              </p>
-            </div>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };

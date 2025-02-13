@@ -22,36 +22,37 @@ const Sales = () => {
     <div>
       <div>
         {result.length > 0 ? (
-          <div className="py-5 px-8">
+          <div className="py-5">
             <SalesState />
-            <DashContainer>
-              <h2 className="text-xl md:text-3xl text-[#1B2850] font-semibold ml-1 mb-5">Total {result.length} Product Sold</h2>
-              <div>
-                <div className="overflow-x-auto min-h-[450px]">
-                  <table className="table w-full ">
-                    {/* head */}
-                    <thead>
-                      <tr className="text-base text-[#1B2850] font-normal bg-[#FAFBFE] border-none rounded-md">
-                        <th>Product Name</th>
-                        <th> Selling Date</th>
-                        <th>Profit</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {currentPosts?.map((saleProduct) => (
-                        <SalesCard key={saleProduct._id} saleProduct={saleProduct}></SalesCard>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <Pagination totalPosts={result.length} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} />
+
+            <h2 className="text-base xsm:text-lg xs:text-xl md:text-3xl text-light-text-100 dark:text-dark-text-100 font-semibold mb-5 mt-10">
+              Total {result.length} Product Sold
+            </h2>
+            <div>
+              <div className="overflow-auto rounded-md block mt-5 shadow-light-container-shadow dark:shadow-dark-container-shadow">
+                <table className="w-full">
+                  {/* head */}
+                  <thead className="bg-gray-50 dark:bg-dark-bg-300 border-b-2 border-gray-200 dark:border-slate-800 text-lg">
+                    <tr className="text-light-text-100 dark:text-dark-text-100">
+                      <th className=" py-4 px-3 text-sm font-semibold tracking-wide text-left">Product Name</th>
+                      <th className="w-28 py-4 px-3 text-sm font-semibold tracking-wide text-center">Selling Date</th>
+                      <th className="w-28 py-4 px-3 text-sm font-semibold tracking-wide text-center whitespace-nowrap">Profit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentPosts?.map((saleProduct) => (
+                      <SalesCard key={saleProduct._id} saleProduct={saleProduct}></SalesCard>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            </DashContainer>
+              <Pagination totalPosts={result.length} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} />
+            </div>
           </div>
         ) : (
           <div className="flex justify-center items-center min-h-[calc(100vh-80px)]">
             <div className="text-center">
-              <h1 className="text-3xl text-[#1B2850] font-extrabold mt-4">No Products Available</h1>
+              <h1 className="text-lg xs:text-3xl text-light-text-100 dark:text-dark-text-100 font-extrabold mt-4">No Products Available</h1>
             </div>
           </div>
         )}

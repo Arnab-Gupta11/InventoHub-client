@@ -26,6 +26,6 @@ export const dashboardManagerLink = [
   {
     label: "Sales Summary",
     Icon: MdSummarize,
-    link: "Sales Summary",
+    link: "sales-summary",
   },
 ];

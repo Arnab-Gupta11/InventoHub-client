@@ -1,3 +1,4 @@
+import { div } from "framer-motion/client";
 import { Helmet } from "react-helmet-async";
 import YouTube from "react-youtube";
 const WatchDemo = () => {
@@ -18,12 +19,19 @@ const WatchDemo = () => {
     event.target.pauseVideo();
   };
   return (
-    <div className="px-5  p-7 mb-10 rounded-md max-w-screen-xl mx-auto min-h-screen mt-6">
-      <Helmet>
-        <title>Inventohub | Watch Demo</title>
-      </Helmet>
-      <div className="border bg-[#FAFBFE] p-7">
-        <YouTube videoId={videoId} opts={opts} onReady={onReady} />
+    <div className="bg-light-bg-200 dark:bg-dark-bg-200 ">
+      <div className="px-5  p-7 mb-10 rounded-md min-h-screen mt-6">
+        <Helmet>
+          <title>Inventohub | Watch Demo</title>
+        </Helmet>
+        <div className="p-7 grid place-items-center">
+          <YouTube
+            videoId={videoId}
+            opts={opts}
+            onReady={onReady}
+            className="bg-light-bg-100 dark:bg-dark-bg-300 p-5 shadow-light-container-shadow dark:shadow-dark-container-shadow rounded-md"
+          />
+        </div>
       </div>
     </div>
   );

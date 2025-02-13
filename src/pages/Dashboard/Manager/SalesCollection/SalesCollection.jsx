@@ -102,7 +102,7 @@ const SalesCollection = () => {
       ) : (
         <div className="flex justify-center items-center min-h-[calc(100vh-80px)]">
           <div className="text-center">
-            <h1 className="text-3xl text-[#1B2850] font-extrabold mt-4">No Product Available</h1>
+            <h1 className="text-lg xs:text-3xl text-light-text-100 dark:text-dark-text-100 font-extrabold mt-4">No Product Available</h1>
           </div>
         </div>
       )}
