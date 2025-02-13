@@ -183,4 +183,4 @@ http://localhost:5173/
 ## 📬 Contact
 
 📧 Email: [arnab.gupta.011@gmail.com](mailto:arnab.gupta.011@gmail.com)
-🌐 Portfolio: [yourportfolio.com](https://arnab-gupta.netlify.app/)
+🌐 Portfolio: [arnab-gupta](https://arnab-gupta.netlify.app/)
