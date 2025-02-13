@@ -1,6 +1,6 @@
 # 🌟 InventoHub - Inventory Management System
 
-> It is an intuitive Inventory Management System. Shop managers effortlessly handle product management, while admins seamlessly oversee and support shop owners. A robust digital solution for efficient and organized retail operations.
+![Banner Screenshot](https://res.cloudinary.com/dgxvtrpmh/image/upload/v1739466603/Screenshot_424_ddhcaq.png)
 
 ## 📝 **Table of Contents**
 
